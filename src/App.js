@@ -4,7 +4,7 @@ import Header from "./components/Header";
 import "./index.css"
 import Footer from './components/Footer';
 import { useState } from 'react';
-import Login from "./components/Login"
+import LoginForm from "./components/LoginForm"
 
 function App() {
   const adminUser = {
@@ -17,6 +17,12 @@ function App() {
 
   const Login = details => {
     console.log(details);
+
+    if(details.email==adminUser.email && details.password==adminUser.password){
+      console.log("admin loged");
+    }else {
+      console.log('Details do not match');
+    }
   }
 
   const Logout = () => {
@@ -32,7 +38,7 @@ function App() {
           <button>Logout</button>
         </div>)
         : (
-          <Login />
+          <LoginForm Login={Login} error={error} />
         )
       }
       <div className="container">
