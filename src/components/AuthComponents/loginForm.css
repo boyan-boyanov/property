@@ -12,7 +12,7 @@ input, button {
     outline: none;
 }
 
-.loginForm__container {
+.basicForm__container {
     height: 50vh;
     display: flex;
     align-items: center;
@@ -20,12 +20,12 @@ input, button {
     background-color: #53565A;
 }
 
-.loginForm {
+.basicForm {
     display: block;
     position: relative;
 }
 
-.loginForm:after {
+.basicForm:after {
     content: '';
     display: block;
     position: absolute;
@@ -37,7 +37,7 @@ input, button {
     background-image: linear-gradient(to bottom right, #FFCE00, #FE4880);
 }
 
-.loginForm .form-inner {
+.basicForm .form-inner {
     position: relative;
     display: block;
     background-color: #FFF;
@@ -45,20 +45,20 @@ input, button {
     z-index: 2;
 }
 
-.loginForm .form-inner h2 {
+.basicForm .form-inner h2 {
     color: #888;
     font-size: 28px;
     font-weight: 500;
     margin-bottom: 30px;
 }
 
-.loginForm .form-inner .form-group {
+.basicForm .form-inner .form-group {
     display: block;
     width: 300px;
     margin-bottom: 15px;
 }
 
-.loginForm .form-inner .form-group label {
+.basicForm .form-inner .form-group label {
     display: block;
     color: #666;
     font-size: 12px;
@@ -66,11 +66,11 @@ input, button {
     transition: 0.4s;
 }
 
-.loginForm .form-inner .form-group:focus-within label {
+.basicForm .form-inner .form-group:focus-within label {
     color: #FE4880;
 }
 
-.loginForm .form-inner .form-group input {
+.basicForm .form-inner .form-group input {
     display: block;
     width: 100%;
     padding: 10px 15px;
@@ -79,11 +79,11 @@ input, button {
     transition: 0.4s;
 }
 
-.loginForm .form-inner .form-group input:hover {
+.basicForm .form-inner .form-group input:hover {
     box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.2);
 }
 
-.loginForm .form-inner input[type="submit"],
+.basicForm .form-inner input[type="submit"],
 .welcome button {
     display: inline-block;
     padding: 10px 15px;
@@ -97,7 +97,7 @@ input, button {
     cursor: pointer;
 }
 
-.loginForm .form-inner input[type="submit"]:hover,
+.basicForm .form-inner input[type="submit"]:hover,
 .welcome button:hover {
     background-position: 100% 0%;
 }

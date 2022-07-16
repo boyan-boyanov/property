@@ -1,5 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
+import { addUser } from '../../services/userServices';
 import './loginForm.css'
 
 export default function RegisterForm({ Login, error }) {
@@ -7,20 +8,21 @@ export default function RegisterForm({ Login, error }) {
 
     function registerHandler(e) {
         setDetails(state => ({ ...state, [e.target.name]: e.target.value }))
-        console.log(details);
+        
     }
 
     function submitHandler (e) {
         e.preventDefault();
-        
+       // console.log(details);
+        addUser(details)
     }
 
     return (
-        <div className='loginForm__container'>
-            <form className='loginForm' onSubmit={submitHandler}>
+        <div className='basicForm__container'>
+            <form className='basicForm' onSubmit={submitHandler}>
                 <div className='form-inner'>
                     <h2>Register</h2>
-                    {(error != "") ? (<div className='error'>{error}</div>) : ""}
+                    {(error !== "") ? (<div className='error'>{error}</div>) : ""}
                     <div className='form-group'>
                         <label htmlFor="name">Name:</label>
                         <input type="name" name="name" id="name" onChange={registerHandler} value={details.name} />
@@ -33,7 +35,7 @@ export default function RegisterForm({ Login, error }) {
                         <label htmlFor="password">Password:</label>
                         <input type="password" name="password" id="password" onChange={registerHandler} />
                     </div>
-                    <input type='submit' value='LOGIN'></input>
+                    <input type='submit' value='LOGIN' onClick={submitHandler}></input>
                 </div>
             </form>
         </div>

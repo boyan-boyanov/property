@@ -4,9 +4,9 @@ import './App.css';
 import './index.css'
 import Header from './components/Header';
 import Footer from './components/Footer';
-import LoginForm from './components/LoginForm'
 import CardComponent from './components/CardComponent/CardComponent'
-import RegisterForm from './components/RegisterForm';
+import LoginForm from './components/AuthComponents/LoginForm'
+import RegisterForm from './components/AuthComponents/RegisterForm';
 
 function App() {
 
