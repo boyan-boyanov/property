@@ -4,17 +4,49 @@ import { register } from '../../services/userServices';
 import './loginForm.css'
 
 export default function RegisterForm({ Login, error }) {
+    const EMAIL_PATTERN = /^([a-zA-Z0-9])+@([a-zA-Z0-9])+\.([a-zA-Z0-9])+$/
     const [details, setDetails] = useState({ name: '', email: '', password: '' })
-
+    const [inputError, setInputError] = useState({})
+    const [labelsErrors, setLabelsErrors] = useState({})
     function registerHandler(e) {
-        setDetails(state => ({ ...state, [e.target.name]: e.target.value }))
-        
+        setDetails(state => ({ ...state, [e.target.name]: e.target.value }), labelError(e.target.name, e.target.value))
     }
 
-    function submitHandler (e) {
+
+    function labelError(name, value) {
+        if (name == "name") {
+            setLabelsErrors(state => ({ ...state, name: !(value.length < 4) }))
+        }
+        if (name == "password") {
+            setLabelsErrors(state => ({ ...state, password: !(value.length < 6) }))
+        }
+        if (name == "email") {
+            setLabelsErrors(state => ({ ...state, email: EMAIL_PATTERN.test(value) }))
+        }
+        if (name == "repass") {
+            setLabelsErrors(state => ({ ...state, repass: details.password == value }))
+        }
+    }
+
+    const inputValidate = (e) => {
+        if (e.target.name == "name") {
+            setInputError(state => ({ ...state, name: details.name.length < 4 }))
+        };
+        if (e.target.name == "password") {
+            setInputError(state => ({ ...state, password: details.password.length < 6 }))
+        };
+        if (e.target.name == "email") {
+            setInputError(state => ({ ...state, email: !EMAIL_PATTERN.test(details.email) }))
+        };
+        if (e.target.name == "repass") {
+            setInputError(state => ({ ...state, repass: details.password !== details.repass }))
+        };
+    }
+
+    function submitHandler(e) {
         e.preventDefault();
-       // console.log(details);
-       register(details)
+        // console.log(details);
+        register(details)
     }
 
     return (
@@ -22,19 +54,42 @@ export default function RegisterForm({ Login, error }) {
             <form className='basicForm' onSubmit={submitHandler}>
                 <div className='form-inner'>
                     <h2>Register</h2>
-                    {(error !== "") ? (<div className='error'>{error}</div>) : ""}
                     <div className='form-group'>
-                        <label htmlFor="name">Name:</label>
-                        <input type="name" name="name" id="name" onChange={registerHandler} value={details.name} />
+                        <label htmlFor="name" className={labelsErrors.name ? 'basicForm__label-error' : ''}>Name:</label>
+                        <input type="name" name="name" id="name" onChange={registerHandler} value={details.name} onBlur={inputValidate} />
                     </div>
+                    {inputError.name &&
+                        <p className='basicForm__form-error'>
+                            Username must be at least 4 character long.
+                        </p>
+                    }
                     <div className='form-group'>
-                        <label htmlFor="email">Email:</label>
-                        <input type="email" name="email" id="email" onChange={registerHandler} value={details.email} />
+                        <label htmlFor="email" className={labelsErrors.email ? 'basicForm__label-error' : ''}>Email:</label>
+                        <input type="email" name="email" id="email" onChange={registerHandler} value={details.email} onBlur={inputValidate} />
                     </div>
+                    {inputError.email &&
+                        <p className='basicForm__form-error'>
+                            Email must be valid.
+                        </p>
+                    }
                     <div className='form-group'>
-                        <label htmlFor="password">Password:</label>
-                        <input type="password" name="password" id="password" onChange={registerHandler} />
+                        <label htmlFor="password" className={labelsErrors.password ? 'basicForm__label-error' : ''}>Password:</label>
+                        <input type="password" name="password" id="password" onChange={registerHandler} onBlur={inputValidate} />
                     </div>
+                    {inputError.password &&
+                        <p className='basicForm__form-error'>
+                            Password must be at least 6 characters long.
+                        </p>
+                    }
+                    <div className='form-group'>
+                        <label htmlFor="repass" className={labelsErrors.repass ? 'basicForm__label-error' : ''}>Confirm Password:</label>
+                        <input type="password" name="repass" id="repass" onChange={registerHandler} onBlur={inputValidate} />
+                    </div>
+                    {inputError.repass &&
+                        <p className='basicForm__form-error'>
+                            Your password and confirmation password do not match.
+                        </p>
+                    }
                     <input type='submit' value='LOGIN' onClick={submitHandler}></input>
                 </div>
             </form>
