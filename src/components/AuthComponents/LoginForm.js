@@ -1,9 +1,14 @@
 import React from 'react';
 import { useState } from 'react';
+import { loggedIn } from '../../services/userServices';
 import './loginForm.css'
 
 export default function LoginForm({ error }) {
-    const [details, setDetails] = useState({ name: '', email: '', password: '' })
+    const [details, setDetails] = useState({ name: '', password: '' })
+
+    function loginHandler(e){
+        setDetails(state => ({ ...state, [e.target.name]: e.target.value }))
+    }
 
     const adminUser = {
         email: "admin@admin.com",
@@ -11,8 +16,8 @@ export default function LoginForm({ error }) {
     }
 
     const Login = details => {
-        console.log(details);
-
+        //console.log(details);
+        loggedIn(details)
         if (details.email == adminUser.email && details.password == adminUser.password) {
             console.log("admin loged");
             //   setUser({
@@ -24,8 +29,9 @@ export default function LoginForm({ error }) {
         }
     }
 
-    const submitHandler = e => {
+    function submitHandler(e) {
         e.preventDefault();
+        console.log(details);
         Login(details)
     }
 
@@ -36,14 +42,14 @@ export default function LoginForm({ error }) {
                     <h2>Login</h2>
                     {(error != "") ? (<div className='error'>{error}</div>) : ""}
                     <div className='form-group'>
-                        <label htmlFor="email">Email:</label>
-                        <input type="email" name="email" id="email" onChange={e => setDetails({ ...details, email: e.target.value })} value={details.email} />
+                        <label htmlFor="name">Name:</label>
+                        <input type="name" name="name" id="name" onChange={loginHandler} value={details.name} />
                     </div>
                     <div className='form-group'>
                         <label htmlFor="password">Password:</label>
-                        <input type="password" name="password" id="password" onChange={e => setDetails({ ...details, password: e.target.value })} />
+                        <input type="password" name="password" id="password" onChange={loginHandler} />
                     </div>
-                    <input type='submit' value='LOGIN'></input>
+                    <input type='submit' value='LOGIN' onClick={submitHandler}></input>
                 </div>
             </form>
         </div>

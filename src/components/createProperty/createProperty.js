@@ -1,7 +1,7 @@
-import React from 'react';
+import React from "react";
+
 import { useState } from 'react';
-import { register } from '../../services/userServices';
-import './loginForm.css'
+import '../AuthComponents/loginForm.css'
 
 export default function RegisterForm({ Login, error }) {
     const [details, setDetails] = useState({ name: '', email: '', password: '' })
@@ -14,7 +14,7 @@ export default function RegisterForm({ Login, error }) {
     function submitHandler (e) {
         e.preventDefault();
        // console.log(details);
-       register(details)
+        addUser(details)
     }
 
     return (
@@ -41,4 +41,3 @@ export default function RegisterForm({ Login, error }) {
         </div>
     )
 }
-

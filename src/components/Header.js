@@ -1,9 +1,21 @@
 import { CgMenuCheese } from 'react-icons/cg';
 import "./header.css"
 import { useState } from "react";
+import { logout, doUserLogOut } from '../services/userServices';
 
 export default function Header() {
   const [isNavExpanded, setIsNavExpanded] = useState(false)
+
+function infoLocal(e){
+  e.preventDefault()
+  console.log("test");
+  console.log(localStorage.userData);
+}
+
+function logOut(e){
+  e.preventDefault()
+  doUserLogOut()
+}
 
   return (
     <header>
@@ -29,7 +41,7 @@ export default function Header() {
               <a href="/home">Home</a>
             </li>
             <li>
-              <a href="/about">About</a>
+              <a href="/about" onClick={infoLocal}>About</a>
             </li>
             <li>
               <a href="/contact">Contact</a>
@@ -39,6 +51,9 @@ export default function Header() {
             </li>
             <li>
               <a href="/register">register</a>
+            </li>
+            <li>
+              <a href="/logout" onClick={logOut}>logout</a>
             </li>
           </ul>
         </div>
