@@ -5,8 +5,8 @@ import './loginForm.css'
 
 export default function LoginForm({ error }) {
     const [details, setDetails] = useState({ name: '', password: '' })
-    const [inputError, setInputError] = useState({})
-    const [labelsErrors, setLabelsErrors] = useState({})
+    const [inputError, setInputError] = useState({name: '', password: '' })
+    const [labelsErrors, setLabelsErrors] = useState({name: '', password: '' })
 
     function loginHandler(e) {
         setDetails(state => ({ ...state, [e.target.name]: e.target.value }), labelError(e.target.name, e.target.value))
@@ -48,8 +48,9 @@ export default function LoginForm({ error }) {
 
     function submitHandler(e) {
         e.preventDefault();
-        console.log(details);
-        Login(details)
+                
+        console.log(Object.values(labelsErrors).every(item => (item !== "" && item == true)));
+       // Login(details)
     }
 
     return (
@@ -76,7 +77,7 @@ export default function LoginForm({ error }) {
                             Password must be at least 6 characters long.
                         </p>
                     }
-                    <input type='submit' value='LOGIN' onClick={submitHandler}></input>
+                    <input disabled={!Object.values(labelsErrors).every(item => (item !== "" && item == true))} type='submit' value='LOGIN' onClick={submitHandler}></input>
                 </div>
             </form>
         </div>

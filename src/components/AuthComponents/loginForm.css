@@ -83,8 +83,8 @@ input, button {
     box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.2);
 }
 
-.basicForm .form-inner input[type="submit"],
-.welcome button {
+.basicForm .form-inner input[type="submit"]
+ {
     display: inline-block;
     padding: 10px 15px;
     border-radius: 8px;
@@ -97,12 +97,12 @@ input, button {
     cursor: pointer;
 }
 
-.basicForm .form-inner input[type="submit"]:hover,
-.welcome button:hover {
+.basicForm .form-inner input[type="submit"]:hover
+  {
     background-position: 100% 0%;
 }
 
-.welcome {
+/* .welcome {
     width: 100%;
     max-width: 480px;
     background-color: #FFF;
@@ -119,16 +119,19 @@ input, button {
 .welcome h2 span {
     color: #FE4880;
     font-weight: 700;
-}
+} */
 
 .basicForm__form-error {
-font-size: 12px;
-color: red;
-margin-bottom: 15px;
-margin-top: -15px;
+    font-size: 12px;
+    color: red;
+    margin-bottom: 15px;
+    margin-top: -15px;
 }
 
-.basicForm .form-inner .form-group:focus-within .basicForm__label-error{
+.basicForm .form-inner .form-group:focus-within .basicForm__label-error {
     color: greenyellow;
 }
 
+.basicForm .form-inner input[type="submit"]:disabled  {
+    background-image: linear-gradient(to right, #888 50%, #888 50%, #888);
+}

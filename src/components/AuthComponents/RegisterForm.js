@@ -5,9 +5,9 @@ import './loginForm.css'
 
 export default function RegisterForm({ Login, error }) {
     const EMAIL_PATTERN = /^([a-zA-Z0-9])+@([a-zA-Z0-9])+\.([a-zA-Z0-9])+$/
-    const [details, setDetails] = useState({ name: '', email: '', password: '' })
+    const [details, setDetails] = useState({ name: '', email: '', password: '', repass: '' })
     const [inputError, setInputError] = useState({})
-    const [labelsErrors, setLabelsErrors] = useState({})
+    const [labelsErrors, setLabelsErrors] = useState({name: '', email: '', password: '', repass: ''})
     function registerHandler(e) {
         setDetails(state => ({ ...state, [e.target.name]: e.target.value }), labelError(e.target.name, e.target.value))
     }
@@ -19,6 +19,9 @@ export default function RegisterForm({ Login, error }) {
         }
         if (name == "password") {
             setLabelsErrors(state => ({ ...state, password: !(value.length < 6) }))
+            if(details.repass !== value){
+                setLabelsErrors(state => ({ ...state, repass: details.password == false }))
+            }
         }
         if (name == "email") {
             setLabelsErrors(state => ({ ...state, email: EMAIL_PATTERN.test(value) }))
@@ -90,7 +93,7 @@ export default function RegisterForm({ Login, error }) {
                             Your password and confirmation password do not match.
                         </p>
                     }
-                    <input type='submit' value='LOGIN' onClick={submitHandler}></input>
+                    <input disabled={!Object.values(labelsErrors).every(item => (item !== "" && item == true))} type='submit' value='LOGIN' onClick={submitHandler}></input>
                 </div>
             </form>
         </div>
