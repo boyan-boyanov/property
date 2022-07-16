@@ -6,14 +6,11 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import LoginForm from './components/LoginForm'
 import CardComponent from './components/CardComponent/CardComponent'
+import RegisterForm from './components/RegisterForm';
 
 function App() {
-  const adminUser = {
-    email: "admin@admin.com",
-    password: "admin123"
-  }
 
- let styles = {
+  let styles = {
     size: "small",
     cardWidth: "",
     cardHeight: "",
@@ -30,54 +27,14 @@ function App() {
     textRows: ""  //not work for now
   }
 
-  const [user, setUser] = useState({ name: "", email: "" })
-  const [error, setError] = useState("")
-
-  const Login = details => {
-    console.log(details);
-
-    if (details.email == adminUser.email && details.password == adminUser.password) {
-      console.log("admin loged");
-      setUser({
-        name: details.name,
-        email: details.email
-      });
-    } else {
-      setError("Some Error");
-    }
-  }
-
-  const Logout = () => {
-    setUser({ name: "", email: "" });
-  }
-
   return (
     <>
       <Header />
-      <div className="container">
-        <article>
-          <h1>What is Lorem Ipsum? </h1>
-          Lorem Ipsum is simply dummy text of the printing and typesetting industry...
-        </article>
-        <article>
-          <h1>What is Lorem Ipsum? </h1>
-          Lorem Ipsum is simply dummy text of the printing and typesetting industry...
-        </article>
-        <article>
-          <h1>What is Lorem Ipsum? </h1>
-          Lorem Ipsum is simply dummy text of the printing and typesetting industry...
-        </article>
-      </div>
-      
-      {(user.email != "") ? (
-        <div className='welcome'>
-          <h2>Welcome, <span>{user.name}</span></h2>
-          <button onClick={Logout}>Logout</button>
-        </div>)
-        : (
-          <LoginForm Login={Login} error={error} />
-        )
-      }
+
+
+      <LoginForm /> 
+      <RegisterForm />
+
       <CardComponent styles={styles} />
       <Footer />
     </>
