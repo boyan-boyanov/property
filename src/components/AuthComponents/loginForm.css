@@ -102,25 +102,6 @@ input, button {
     background-position: 100% 0%;
 }
 
-/* .welcome {
-    width: 100%;
-    max-width: 480px;
-    background-color: #FFF;
-    padding: 15px 30px;
-}
-
-.welcome h2 {
-    color: #888;
-    font-size: 28px;
-    font-weight: 500;
-    margin-bottom: 30px;
-}
-
-.welcome h2 span {
-    color: #FE4880;
-    font-weight: 700;
-} */
-
 .basicForm__form-error {
     font-size: 12px;
     color: red;

@@ -49,8 +49,8 @@ export default function LoginForm({ error }) {
     function submitHandler(e) {
         e.preventDefault();
                 
-        console.log(Object.values(labelsErrors).every(item => (item !== "" && item == true)));
-       // Login(details)
+        
+        Login(details)
     }
 
     return (
