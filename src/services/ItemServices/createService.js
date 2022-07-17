@@ -9,7 +9,7 @@ Parse.serverURL = PARSE_HOST_URL;
 
 
 export async function createItem(data) {
-    console.log(data);
+   // console.log(data);
     let owner = ''
     if (localStorage.getItem('userData')) {
         owner = JSON.parse(localStorage.getItem('userData')).objectId
@@ -30,7 +30,7 @@ export async function createItem(data) {
         
         //Prepare data to update myOffer list
         const userData = await getUserData()
-        console.log(userData);
+       // console.log(userData);
         const dataForUpdate = {
             'myOffer': [...userData.myOffer, itemId]
         }

@@ -9,6 +9,7 @@ import LoginForm from './components/AuthComponents/LoginForm'
 import RegisterForm from './components/AuthComponents/RegisterForm';
 import CreatePropertyForm from './components/Properties/CreatePropertyForm';
 
+
 function App() {
 
   let styles = {

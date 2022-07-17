@@ -41,6 +41,9 @@ function logOut(e){
               <a href="/home">Home</a>
             </li>
             <li>
+              <a href="/catalog">Catalog</a>
+            </li>
+            <li>
               <a href="/about">About</a>
             </li>
             <li>
