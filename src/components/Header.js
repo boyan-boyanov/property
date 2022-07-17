@@ -1,15 +1,15 @@
 import { CgMenuCheese } from 'react-icons/cg';
 import "./header.css"
 import { useState } from "react";
-import { logout, doUserLogOut } from '../services/userServices';
+import { doUserLogOut, updateUser, getUserData } from '../services/userServices';
 
 export default function Header() {
   const [isNavExpanded, setIsNavExpanded] = useState(false)
 
-function infoLocal(e){
+function update(e){
   e.preventDefault()
   console.log("test");
-  console.log(localStorage.userData);
+  updateUser()
 }
 
 function logOut(e){
@@ -41,10 +41,10 @@ function logOut(e){
               <a href="/home">Home</a>
             </li>
             <li>
-              <a href="/about" onClick={infoLocal}>About</a>
+              <a href="/about">About</a>
             </li>
             <li>
-              <a href="/contact">Contact</a>
+              <a href="/contact" onClick={update}>Contact</a>
             </li>
             <li>
               <a href="/login">login</a>

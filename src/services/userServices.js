@@ -24,53 +24,88 @@ export async function loggedIn(data) {
     console.log(data);
     try {
         let user = await Parse.User.logIn(data.name, data.password);
-        localStorage.setItem("userData",JSON.stringify(user));
+        localStorage.setItem("userData", JSON.stringify(user));
         console.log('Comment created', user);
     } catch (error) {
         console.error('Error while creating Comment: ', error);
     }
 }
 
-export async function logout(){
-    if(localStorage.getItem('userData')){
-        let userData = JSON.parse(localStorage.getItem('userData'))
-        console.log(userData.username);
-        
-    }else{
-        console.log('not user data');
-    }
-    
-        // try {
-        //   let user = await Parse.User.logIn(userData.username,'#Password123');
-        //   const currentUser = Parse.User.current();
-        //   console.log('Current logged in user', currentUser);
-        // } catch (error) {
-        //   console.error('Error while logging in user', error);
-        // }
-    
-}
-
 export async function doUserLogOut() {
     try {
-      await Parse.User.logOut();
-      // To verify that current user is now empty, currentAsync can be used
-      const currentUser = await Parse.User.current();
-      if (currentUser === null) {
-        alert('Success! No user is logged in anymore!');
-      }
-      // Update state variable holding current user
-      getCurrentUser();
-      localStorage.removeItem('userData')
-      return true;
+        await Parse.User.logOut();
+        // To verify that current user is now empty, currentAsync can be used
+        const currentUser = await Parse.User.current();
+        if (currentUser === null) {
+            alert('Success! No user is logged in anymore!');
+        }
+        // Update state variable holding current user
+        getCurrentUser();
+        localStorage.removeItem('userData')
+        return true;
     } catch (error) {
-      alert(`Error! ${error.message}`);
-      return false;
+        alert(`Error! ${error.message}`);
+        return false;
     }
-  };
-  
-  const getCurrentUser = async function () {
+};
+
+
+export async function updateUser(bodyData) {
+    try {
+        let owner = '';
+        let token = '';
+        if (localStorage.getItem('userData')) {
+            const userData = JSON.parse(localStorage.getItem('userData'));
+            owner = userData.objectId;
+            token = userData.sessionToken;
+        } else {
+            throw new Error('There is not logged user')
+        }
+        const config = {
+            method: 'PUT',
+            headers: {
+                'X-Parse-Application-Id': '62MiP8VdJxtvy35FJ52VYDC5LDKk5asRiGMoiLPd',
+                'X-Parse-REST-API-Key': '53WdfHoxCS9NGG50G6C2IWCHsUBjOfCt2LnDVasQ',
+                'X-Parse-Session-Token': token,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(bodyData)
+
+        }
+        let response = await fetch(`${PARSE_HOST_URL}/users/${owner}`, config);
+        return await response.json();
+        
+    } catch (error) {
+         console.error('Error while retrieving user', error);
+    }
+}
+
+
+
+const getCurrentUser = async function () {
     const currentUser = await Parse.User.current();
     // Update state variable holding current user
     //setCurrentUser(currentUser);
     return currentUser;
-  };
+};
+
+export async function getUserData() {
+    try {
+        let owner = ''
+        if (localStorage.getItem('userData')) {
+            owner = JSON.parse(localStorage.getItem('userData')).objectId
+        } else {
+            throw new Error('There is not logged user')
+        }
+        let response = await fetch(`${PARSE_HOST_URL}/users/${owner}`, {
+            headers: {
+                'X-Parse-Application-Id': '62MiP8VdJxtvy35FJ52VYDC5LDKk5asRiGMoiLPd',
+                'X-Parse-REST-API-Key': '53WdfHoxCS9NGG50G6C2IWCHsUBjOfCt2LnDVasQ'
+            }
+        });
+        return await response.json();
+    } catch (err) {
+        console.error(err);
+        // Handle errors here.
+    }
+}
