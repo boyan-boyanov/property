@@ -7,6 +7,7 @@ import Footer from './components/Footer';
 import CardComponent from './components/CardComponent/CardComponent'
 import LoginForm from './components/AuthComponents/LoginForm'
 import RegisterForm from './components/AuthComponents/RegisterForm';
+import CreatePropertyForm from './components/Properties/CreatePropertyForm';
 
 function App() {
 
@@ -31,8 +32,8 @@ function App() {
     <>
       <Header />
 
-
-      <LoginForm /> 
+      <CreatePropertyForm />
+      <LoginForm />
       <RegisterForm />
 
       <CardComponent styles={styles} />

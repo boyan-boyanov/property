@@ -83,8 +83,7 @@ input, button {
     box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.2);
 }
 
-.basicForm .form-inner input[type="submit"]
- {
+.basicForm .form-inner input[type="submit"] {
     display: inline-block;
     padding: 10px 15px;
     border-radius: 8px;
@@ -97,8 +96,7 @@ input, button {
     cursor: pointer;
 }
 
-.basicForm .form-inner input[type="submit"]:hover
-  {
+.basicForm .form-inner input[type="submit"]:hover {
     background-position: 100% 0%;
 }
 
@@ -113,6 +111,26 @@ input, button {
     color: greenyellow;
 }
 
-.basicForm .form-inner input[type="submit"]:disabled  {
+.basicForm .form-inner input[type="submit"]:disabled {
     background-image: linear-gradient(to right, #888 50%, #888 50%, #888);
+}
+
+.basicForm .form-inner .form-group input.btn-radio {
+    appearance: radio;
+    display: inline-block;
+    width: auto;
+    margin-left: 5px;
+    margin-right: 10px;
+}
+
+.basicForm .form-inner .form-group .label-radio {
+    display: inline-block;
+}
+
+.basicForm .form-inner .form-group:focus-within .label-radio {
+    color: red;
+}
+
+.basicForm .form-inner .form-group:focus-within .label-radio.selected{
+    color: greenyellow;
 }

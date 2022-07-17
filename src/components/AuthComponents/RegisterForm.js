@@ -93,7 +93,7 @@ export default function RegisterForm({ Login, error }) {
                             Your password and confirmation password do not match.
                         </p>
                     }
-                    <input disabled={!Object.values(labelsErrors).every(item => (item !== "" && item == true))} type='submit' value='LOGIN' onClick={submitHandler}></input>
+                    <input disabled={!Object.values(labelsErrors).every(item => (item !== "" && item == true))} type='submit' value='REGISTER' onClick={submitHandler}></input>
                 </div>
             </form>
         </div>
