@@ -1,10 +1,12 @@
 import React from 'react';
 import { useState } from 'react';
+import { createItem } from '../../services/ItemServices/createService';
 import '../AuthComponents/loginForm.css'
+
 
 export default function CreatePropertyForm({ error }) {
     const IMAGE_PATTERN = /^https?:\/\/.+$/
-    const [details, setDetails] = useState({ type: '', description: '', price: '', image: '', rentOrSale: '' })
+    const [details, setDetails] = useState({ type: 'house', description: '', price: '', image: '', rentOrSale: '' })
     const [inputError, setInputError] = useState({})
     const [labelsErrors, setLabelsErrors] = useState({ description: '', price: '', image: '', rentOrSale: '' })
     function createHandler(e) {
@@ -48,8 +50,7 @@ export default function CreatePropertyForm({ error }) {
 
     function submitHandler(e) {
         e.preventDefault();
-        console.log(Object.values(labelsErrors).every(item => (item !== "" && item == true)))
-        console.log(labelsErrors)
+        createItem(details)
     }
 
     return (
