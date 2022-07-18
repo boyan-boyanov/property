@@ -23,7 +23,7 @@ export async function createItem(data) {
     newHome.set('Description', data.description);
     newHome.set('Price', data.price);
     newHome.set('RentOrSale', data.rentOrSale);
-    newHome.set('Images', [1, data.image]);
+    newHome.set('Images', [data.image]);
     try {
         const result = await newHome.save();
         const itemId = result.id

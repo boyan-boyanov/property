@@ -1,16 +1,17 @@
 import { CgMenuCheese } from 'react-icons/cg';
 import "./header.css"
 import { useState } from "react";
-import { doUserLogOut, updateUser, getUserData } from '../services/userServices';
+import { doUserLogOut, updateUser} from '../services/userServices';
+import {Link} from 'react-router-dom'
 
 export default function Header() {
   const [isNavExpanded, setIsNavExpanded] = useState(false)
 
-function update(e){
-  e.preventDefault()
-  console.log("test");
-  updateUser()
-}
+// function update(e){
+//   e.preventDefault()
+//   console.log("test");
+//   updateUser()
+// }
 
 function logOut(e){
   e.preventDefault()
@@ -38,25 +39,25 @@ function logOut(e){
         >
           <ul>
             <li>
-              <a href="/home">Home</a>
+              <Link to="/">Home</Link>
             </li>
             <li>
-              <a href="/catalog">Catalog</a>
+              <Link to="/catalog">Catalog</Link>
             </li>
             <li>
-              <a href="/about">About</a>
+              <Link to="/about">About</Link>
             </li>
             <li>
-              <a href="/contact" onClick={update}>Contact</a>
+              <Link to="/create">Create</Link>
             </li>
             <li>
-              <a href="/login">login</a>
+              <Link to="/login">login</Link>
             </li>
             <li>
-              <a href="/register">register</a>
+              <Link to="/register">register</Link>
             </li>
             <li>
-              <a href="/logout" onClick={logOut}>logout</a>
+              <Link to="/logout" onClick={logOut}>logout</Link>
             </li>
           </ul>
         </div>

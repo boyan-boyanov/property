@@ -1,5 +1,3 @@
-import logo from './logo.svg';
-import { useState } from 'react';
 import './App.css';
 import './index.css'
 import Header from './components/Header';
@@ -8,6 +6,7 @@ import CardComponent from './components/CardComponent/CardComponent'
 import LoginForm from './components/AuthComponents/LoginForm'
 import RegisterForm from './components/AuthComponents/RegisterForm';
 import CreatePropertyForm from './components/Properties/CreatePropertyForm';
+import { Routes, Route } from 'react-router-dom'
 
 
 function App() {
@@ -32,10 +31,12 @@ function App() {
   return (
     <>
       <Header />
-
-      <CreatePropertyForm />
-      <LoginForm />
-      <RegisterForm />
+      
+      <Routes>
+        <Route path='/login' element={<LoginForm />} />
+        <Route path='/register' element={<RegisterForm />} />
+        <Route path='/create' element={<CreatePropertyForm />} />
+      </Routes>
 
       <CardComponent styles={styles} />
       <Footer />
