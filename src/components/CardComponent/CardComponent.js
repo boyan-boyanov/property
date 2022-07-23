@@ -1,12 +1,21 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./CardComponent.css"
 
 const CardComponent = (props) => {
-  
-    console.log(props);
+    const [isOwner, setIsOwner] = useState(false)
+
+    useEffect(() => {
+        if (localStorage.getItem('userData') != null) {
+            const owner = JSON.parse(localStorage.getItem('userData')).objectId
+            if (owner == props.owner) {
+                setIsOwner(true)
+            }
+        }
+    })
+    //console.log(props);
     let size = props.styles.size || "small"
     let images = []
-    if(props.styles.image){
+    if (props.styles.image) {
         images = props.styles.image.split(' ')
     }
     let key = 1;
@@ -42,6 +51,12 @@ const CardComponent = (props) => {
                     <h1 style={titleColor} className={"CardComponent__title " + props.styles.size}>{props.styles.title}</h1>
                     <p style={descriptionColor} className={"CardComponent__info " + props.styles.size}>{props.styles.description}</p>
                 </section>
+                {isOwner &&
+                <div>
+                    <input className="cardComponentBtn" type='submit' value='EDIT'></input>
+                    <input className="cardComponentBtn" type='submit' value='DELETE'></input>
+                </div>                
+                }
             </article>
         </div>
 

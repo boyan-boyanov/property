@@ -235,3 +235,43 @@
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
+
+.cardComponentBtn {
+    appearance: none;
+    background: none;
+    border: none;
+    outline: none;
+}
+
+
+.cardComponentBtn[type="submit"] {
+    display: inline-block;
+    padding: 10px 15px;
+    border-radius: 8px;
+    background-image: linear-gradient(to right, #FFCE00 50%, #FFCE00 50%, #FE4880);
+    background-size: 200%;
+    background-position: 0%;
+    transition: 0.4s;
+    color: #FFF;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.cardComponentBtn:hover {
+    box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.2);
+}
+
+.cardComponentBtn {
+    display: block;
+    width: 40%;
+    padding: 10px 15px;
+    background-color: #F8F8F8;
+    border-radius: 8px;
+    transition: 0.4s;
+    margin: 5% 5%;
+}
+
+.cardComponentBtn[type="submit"]:hover {
+    background-position: 100% 0%;
+}
