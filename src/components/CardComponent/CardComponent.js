@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import "./CardComponent.css"
+import { Link } from "react-router-dom";
 
 const CardComponent = (props) => {
     const [isOwner, setIsOwner] = useState(false)
-
+console.log(props);
     useEffect(() => {
         if (localStorage.getItem('userData') != null) {
             const owner = JSON.parse(localStorage.getItem('userData')).objectId
-            if (owner == props.owner) {
+            if (owner == props.allId.owner) {
                 setIsOwner(true)
             }
         }
@@ -53,13 +54,13 @@ const CardComponent = (props) => {
                 </section>
                 {isOwner &&
                     <div>
-                        <input className="cardComponentBtn" type='submit' value='EDIT'></input>
-                        <input className="cardComponentBtn" type='submit' value='DELETE'></input>
+                        <Link to={`/catalog/${props.allId.itemId}`}  className="cardComponentBtn"  >EDIT</Link>
+                        <Link to={'/'}  className="cardComponentBtn" >DELETE</Link>
                     </div>
                 }
                 {!isOwner &&
                     <div>
-                        <input className="cardComponentBtn" type='submit' value='DETAILS'></input>
+                        <Link to={`/catalog/${props.allId.itemId}`}  className="cardComponentBtn" >DETAILS</Link>
                     </div>
                 }
             </article>

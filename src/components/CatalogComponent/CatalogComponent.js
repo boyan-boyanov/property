@@ -49,7 +49,7 @@ export const CatalogComponent = () => {
     return (
         <div className={'catalog-container'}>
             <h1>Catalog</h1>
-            {allData.map(x => <CardComponent key={x.objectId} styles={createProps(x)} owner={x.Owner}/>)}
+            {allData.map(x => <CardComponent key={x.objectId} styles={createProps(x)} allId={{owner: x.Owner, itemId: x.objectId}}/>)}
 
         </div>
     )

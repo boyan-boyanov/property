@@ -245,7 +245,7 @@
 }
 
 
-.cardComponentBtn[type="submit"] {
+.cardComponentBtn {
     display: inline-block;
     padding: 10px 15px;
     border-radius: 8px;
@@ -256,6 +256,7 @@
     color: #FFF;
     font-weight: 700;
     cursor: pointer;
+    text-align: center;
 }
 
 .cardComponentBtn:hover {
@@ -272,6 +273,6 @@
     margin: 5% 5%;
 }
 
-.cardComponentBtn[type="submit"]:hover {
+.cardComponentBtn:hover {
     background-position: 100% 0%;
 }
