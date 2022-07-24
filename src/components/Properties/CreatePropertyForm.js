@@ -18,22 +18,23 @@ export default function CreatePropertyForm(props) {
     useEffect(() => {
         if (props.data) {
             const id = props.data.objectId
-            console.log(id);
+          //  console.log(id);
             async function waitData() {
                 const data = await getOne(id)
                 const currentItem = {
                     type: data.Type,
                     description: data.Description,
                     price: data.Price,
-                    image: data.Images[0]
+                    image: data.Images[0],
+                    rentOrSale: data.RentOrSale
                 }
                 setDetails(state => ({ ...state, ...currentItem }))
                 const trueLabelErrors = {
-                    description: true, price: true, image: true
+                    description: true, price: true, image: true, rentOrSale: true
                 }
                 setLabelsErrors(state => ({ ...labelsErrors, ...trueLabelErrors }))
-                console.log(data);
-                console.log(details);
+               // console.log(data);
+               // console.log(details);
             }
             waitData()
         }
@@ -86,7 +87,7 @@ export default function CreatePropertyForm(props) {
         } else {
             createItem(details)
         }
-        navigate('/catalog')
+        navigate('/')
     }
 
     return (
@@ -136,9 +137,9 @@ export default function CreatePropertyForm(props) {
 
                     <div className='form-group'>
                         <label htmlFor="rent" className={'basicForm__label-error label-radio' + ` ${details.rentOrSale == 'rent' ? 'selected' : ''}`}>Rent:</label>
-                        <input type="radio" className='btn-radio' name="rentOrSale" value='rent' id="rent" onChange={createHandler} />
+                        <input type="radio" checked={details.rentOrSale == 'rent'}  className='btn-radio' name="rentOrSale" value='rent' id="rent" onChange={createHandler} />
                         <label htmlFor="sale" className={'basicForm__label-error label-radio' + ` ${details.rentOrSale == 'sale' ? 'selected' : ''}`}>Sale:</label>
-                        <input type="radio" className='btn-radio' name="rentOrSale" value='sale' id="sale" onChange={createHandler} />
+                        <input type="radio" checked={details.rentOrSale == 'sale'} className='btn-radio' name="rentOrSale" value='sale' id="sale" onChange={createHandler} />
                     </div>
 
                     <input disabled={!Object.values(labelsErrors).every(item => (item !== "" && item == true))} type='submit' value={props.data ? "EDIT" : "CREATE"} onClick={submitHandler}></input>

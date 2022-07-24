@@ -47,8 +47,8 @@ export async function createItem(data) {
 
 
 export async function editItem(data, id){
-    console.log(data);
-    console.log(id);
+   // console.log(data);
+   // console.log(id);
 
     const query = new Parse.Query('Properties');
   try {
@@ -70,7 +70,7 @@ export async function editItem(data, id){
     //   console.log(response.get('Price'));
     //   console.log(response.get('RentOrSale'));
     //   console.log(response.get('Images'));
-      console.log('Properties updated', response);
+    //  console.log('Properties updated', response);
     } catch (error) {
       console.error('Error while updating Properties', error);
       }
