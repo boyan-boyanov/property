@@ -52,10 +52,15 @@ const CardComponent = (props) => {
                     <p style={descriptionColor} className={"CardComponent__info " + props.styles.size}>{props.styles.description}</p>
                 </section>
                 {isOwner &&
-                <div>
-                    <input className="cardComponentBtn" type='submit' value='EDIT'></input>
-                    <input className="cardComponentBtn" type='submit' value='DELETE'></input>
-                </div>                
+                    <div>
+                        <input className="cardComponentBtn" type='submit' value='EDIT'></input>
+                        <input className="cardComponentBtn" type='submit' value='DELETE'></input>
+                    </div>
+                }
+                {!isOwner &&
+                    <div>
+                        <input className="cardComponentBtn" type='submit' value='DETAILS'></input>
+                    </div>
                 }
             </article>
         </div>

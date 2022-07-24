@@ -8,7 +8,8 @@ import RegisterForm from './components/AuthComponents/RegisterForm';
 import CreatePropertyForm from './components/Properties/CreatePropertyForm';
 import { Routes, Route } from 'react-router-dom'
 import HomeComponent from './components/HomeComponent/HomeComponent';
-import  {CatalogComponent}  from './components/CatalogComponent/CatalogComponent';
+import { CatalogComponent } from './components/CatalogComponent/CatalogComponent';
+import NotFound from './components/NotFound';
 
 
 function App() {
@@ -23,7 +24,8 @@ function App() {
         <Route path='/register' element={<RegisterForm />} />
         <Route path='/create' element={<CreatePropertyForm />} />
         <Route path='/' element={<HomeComponent />} />
-        <Route path='/catalog' element={<CatalogComponent/>} />
+        <Route path='/catalog' element={<CatalogComponent />} />
+        <Route path='*' element={<NotFound />} />
       </Routes>
 
       <Footer />

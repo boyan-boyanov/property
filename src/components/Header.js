@@ -2,7 +2,7 @@ import { CgMenuCheese } from 'react-icons/cg';
 import "./header.css"
 import { useState } from "react";
 import { doUserLogOut, updateUser} from '../services/userServices';
-import {Link, NavLink} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 
 export default function Header() {
   const [isNavExpanded, setIsNavExpanded] = useState(false)
@@ -21,9 +21,9 @@ function logOut(e){
   return (
     <header>
       <nav className="navigation">
-        <a href="/" className="brand-name">
+        <Link to="/" className="brand-name">
           VarnaProperties
-        </a>
+        </Link>
         <button
           className="drop-menu"
           onClick={() => {
