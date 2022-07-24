@@ -1,5 +1,6 @@
 import Parse from 'parse/dist/parse.min.js';
 
+
 const PARSE_APPLICATION_ID = '62MiP8VdJxtvy35FJ52VYDC5LDKk5asRiGMoiLPd';
 const PARSE_HOST_URL = 'https://parseapi.back4app.com/';
 const PARSE_JAVASCRIPT_KEY = 'V5XM1OCDkmjasMI30CAnMnpsgkIBHMvzTNfoCBO4';
@@ -8,6 +9,11 @@ Parse.serverURL = PARSE_HOST_URL;
 
 export async function register(data) {
     console.log(data);
+    
+    const autoLgoinData = {
+        name: data.email,
+        password: data.password
+    }
     const user = new Parse.User();
     user.set('username', data.name);
     user.set('email', data.email);
@@ -15,19 +21,22 @@ export async function register(data) {
     try {
         let userResult = await user.signUp();
         console.log('User signed up', userResult);
+        loggedIn(autoLgoinData)
+        return "create"
     } catch (error) {
-        console.error('Error while signing up user', error);
+        return "false";
     }
 }
 
 export async function loggedIn(data) {
-    console.log(data);
+        console.log(data);
     try {
         let user = await Parse.User.logIn(data.name, data.password);
         localStorage.setItem("userData", JSON.stringify(user));
-        console.log('Comment created', user);
+        return 'create';
+       
     } catch (error) {
-        console.error('Error while creating Comment: ', error);
+        return 'false';
     }
 }
 
@@ -42,6 +51,7 @@ export async function doUserLogOut() {
         // Update state variable holding current user
         getCurrentUser();
         localStorage.removeItem('userData')
+       
         return true;
     } catch (error) {
         alert(`Error! ${error.message}`);

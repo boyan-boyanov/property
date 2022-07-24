@@ -42,3 +42,39 @@ export async function createItem(data) {
         console.error('Error while creating Properties: ', error);
     }
 }
+
+
+
+
+export async function editItem(data, id){
+    console.log(data);
+    console.log(id);
+
+    const query = new Parse.Query('Properties');
+  try {
+    // here you put the objectId that you want to update
+    const newHome = await query.get(id);
+    newHome.set('Type', data.type);
+    newHome.set('Description', data.description);
+    newHome.set('Price', data.price);
+    newHome.set('RentOrSale', data.rentOrSale);
+    newHome.set('Images', [data.image]);
+    try {
+      const response = await newHome.save();
+      // You can use the "get" method to get the value of an attribute
+      // Ex: response.get("<ATTRIBUTE_NAME>")
+      // Access the Parse Object attributes using the .GET method
+    //   console.log(response.get('Owner'));
+    //   console.log(response.get('Type'));
+    //   console.log(response.get('Description'));
+    //   console.log(response.get('Price'));
+    //   console.log(response.get('RentOrSale'));
+    //   console.log(response.get('Images'));
+      console.log('Properties updated', response);
+    } catch (error) {
+      console.error('Error while updating Properties', error);
+      }
+    } catch (error) {
+      console.error('Error while retrieving object Properties', error);
+    }
+}

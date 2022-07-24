@@ -1,14 +1,45 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useState } from 'react';
-import { createItem } from '../../services/ItemServices/createService';
+import { createItem, editItem } from '../../services/ItemServices/createService';
+import { getOne } from '../../services/ItemServices/getServices';
+import { loggedIn } from '../../services/userServices';
 import '../AuthComponents/loginForm.css'
+import { useNavigate } from 'react-router-dom';
 
 
-export default function CreatePropertyForm({ error }) {
+export default function CreatePropertyForm(props) {
     const IMAGE_PATTERN = /^https?:\/\/.+$/
     const [details, setDetails] = useState({ type: 'house', description: '', price: '', image: '', rentOrSale: '' })
     const [inputError, setInputError] = useState({})
     const [labelsErrors, setLabelsErrors] = useState({ description: '', price: '', image: '', rentOrSale: '' })
+
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        if (props.data) {
+            const id = props.data.objectId
+            console.log(id);
+            async function waitData() {
+                const data = await getOne(id)
+                const currentItem = {
+                    type: data.Type,
+                    description: data.Description,
+                    price: data.Price,
+                    image: data.Images[0]
+                }
+                setDetails(state => ({ ...state, ...currentItem }))
+                const trueLabelErrors = {
+                    description: true, price: true, image: true
+                }
+                setLabelsErrors(state => ({ ...labelsErrors, ...trueLabelErrors }))
+                console.log(data);
+                console.log(details);
+            }
+            waitData()
+        }
+
+    }, [])
+
     function createHandler(e) {
         setDetails(state => ({ ...state, [e.target.name]: e.target.value }), labelError(e.target.name, e.target.value))
     }
@@ -50,14 +81,20 @@ export default function CreatePropertyForm({ error }) {
 
     function submitHandler(e) {
         e.preventDefault();
-        createItem(details)
+        if (props.data) {
+            editItem(details, props.data.objectId)
+        } else {
+            createItem(details)
+        }
+        navigate('/catalog')
     }
 
     return (
         <div className='basicForm__container'>
+
             <form className='basicForm' onSubmit={submitHandler}>
                 <div className='form-inner'>
-                    <h2>Create Property</h2>
+                    <h2>{props.data ? "Edit" : "Create"} Property</h2>
                     <div className='form-group'>
                         <label htmlFor="name" className='basicForm__label-error'>Type:</label>
                         <select name='type' id='type' value={details.type} onChange={createHandler}>
@@ -104,7 +141,7 @@ export default function CreatePropertyForm({ error }) {
                         <input type="radio" className='btn-radio' name="rentOrSale" value='sale' id="sale" onChange={createHandler} />
                     </div>
 
-                    <input disabled={!Object.values(labelsErrors).every(item => (item !== "" && item == true))} type='submit' value='CREATE' onClick={submitHandler}></input>
+                    <input disabled={!Object.values(labelsErrors).every(item => (item !== "" && item == true))} type='submit' value={props.data ? "EDIT" : "CREATE"} onClick={submitHandler}></input>
                 </div>
             </form>
         </div>

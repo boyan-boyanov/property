@@ -9,7 +9,7 @@ export const CatalogComponent = () => {
     useEffect(() => {
         async function waitData() {
             const data = await getAll()
-            console.log(data);
+           // console.log(data);
             setAllData(data.results)
         }
         waitData()
@@ -25,7 +25,7 @@ export const CatalogComponent = () => {
         let pic = ''
         for (let img of x.Images) {
             pic = pic + img + " "
-            console.log(pic);
+            //console.log(pic);
         }
         pic = pic.trim()
         return {

@@ -5,7 +5,7 @@
 
 /* Style for large card*/
 
-.CardComponent__container{
+.CardComponent__container {
     margin-left: 200px;
     margin-top: 50px;
     margin-bottom: 50px;
@@ -264,7 +264,6 @@
 }
 
 .cardComponentBtn {
-    display: block;
     width: 40%;
     padding: 10px 15px;
     background-color: #F8F8F8;

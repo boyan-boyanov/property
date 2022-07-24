@@ -134,3 +134,7 @@ input, button {
 .basicForm .form-inner .form-group:focus-within .label-radio.selected{
     color: greenyellow;
 }
+
+.loginError{
+    color: red;
+}

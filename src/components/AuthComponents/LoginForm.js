@@ -1,31 +1,34 @@
 import React from 'react';
 import { useState } from 'react';
 import { loggedIn } from '../../services/userServices';
+import { useNavigate } from 'react-router-dom';
 import './loginForm.css'
 
 export default function LoginForm({ error }) {
     const [details, setDetails] = useState({ name: '', password: '' })
-    const [inputError, setInputError] = useState({name: '', password: '' })
-    const [labelsErrors, setLabelsErrors] = useState({name: '', password: '' })
+    const [inputError, setInputError] = useState({ name: '', password: '' })
+    const [labelsErrors, setLabelsErrors] = useState({ name: '', password: '' })
+    const [serverError, setServerError] = useState('')
+    const navigate = useNavigate()
 
     function loginHandler(e) {
         setDetails(state => ({ ...state, [e.target.name]: e.target.value }), labelError(e.target.name, e.target.value))
     }
 
     function labelError(name, value) {
-        if (name == "name") {
+        if (name === "name") {
             setLabelsErrors(state => ({ ...state, name: !(value.length < 4) }))
         }
-        if (name == "password") {
+        if (name === "password") {
             setLabelsErrors(state => ({ ...state, password: !(value.length < 6) }))
         }
     }
 
     const inputValidate = (e) => {
-        if (e.target.name == "name") {
+        if (e.target.name === "name") {
             setInputError(state => ({ ...state, name: details.name.length < 4 }))
         };
-        if (e.target.name == "password") {
+        if (e.target.name === "password") {
             setInputError(state => ({ ...state, password: details.password.length < 6 }))
         };
     }
@@ -35,22 +38,21 @@ export default function LoginForm({ error }) {
         password: "admin123"
     }
 
-    const Login = details => {
-
-        loggedIn(details)
-        if (details.email == adminUser.email && details.password == adminUser.password) {
-            console.log("admin loged");
-
-        } else {
-            //   setError("Some Error");
-        }
-    }
-
-    function submitHandler(e) {
+    async function submitHandler(e) {
         e.preventDefault();
-                
-        
-        Login(details)
+        const isLoged = await loggedIn(details)
+        console.log(isLoged);
+        if (isLoged === "false") {
+            setServerError("Username or password not match")
+        } else if (isLoged === "create") {
+            navigate('/catalog')
+        }
+        if (details.email === adminUser.email && details.password === adminUser.password) {
+            // navigate('/catalog')
+        } else {
+            //setServerError("Username or password not match")           
+        }
+
     }
 
     return (
@@ -58,7 +60,7 @@ export default function LoginForm({ error }) {
             <form className='basicForm' onSubmit={submitHandler}>
                 <div className='form-inner'>
                     <h2>Login</h2>
-                    {/* {(error != "") ? (<div className='error'>{error}</div>) : ""} */}
+                    {serverError !== "" && <div className='loginError'>{serverError}</div>}
                     <div className='form-group'>
                         <label htmlFor="name" className={labelsErrors.name ? 'basicForm__label-error' : ''}>Name:</label>
                         <input type="name" name="name" id="name" onChange={loginHandler} value={details.name} onBlur={inputValidate} />
@@ -77,7 +79,7 @@ export default function LoginForm({ error }) {
                             Password must be at least 6 characters long.
                         </p>
                     }
-                    <input disabled={!Object.values(labelsErrors).every(item => (item !== "" && item == true))} type='submit' value='LOGIN' onClick={submitHandler}></input>
+                    <input disabled={!Object.values(labelsErrors).every(item => (item !== "" && item === true))} type='submit' value='LOGIN' onClick={submitHandler}></input>
                 </div>
             </form>
         </div>

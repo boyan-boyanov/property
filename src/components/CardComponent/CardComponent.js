@@ -4,15 +4,16 @@ import { Link } from "react-router-dom";
 
 const CardComponent = (props) => {
     const [isOwner, setIsOwner] = useState(false)
-console.log(props);
+    //const params = useParams()
+    // console.log(props);
     useEffect(() => {
         if (localStorage.getItem('userData') != null) {
             const owner = JSON.parse(localStorage.getItem('userData')).objectId
-            if (owner == props.allId.owner) {
+            if (owner === props.allId.owner) {
                 setIsOwner(true)
             }
         }
-    })
+    }, [props.allId.owner])
     //console.log(props);
     let size = props.styles.size || "small"
     let images = []
@@ -51,16 +52,23 @@ console.log(props);
                     <h5 style={subtitleColor} className={"CardComponent__subtitle " + props.styles.size}>{props.styles.subtitle}</h5>
                     <h1 style={titleColor} className={"CardComponent__title " + props.styles.size}>{props.styles.title}</h1>
                     <p style={descriptionColor} className={"CardComponent__info " + props.styles.size}>{props.styles.description}</p>
+                    <div>
+                        {props.styles.size === 'large' ? <Link to={`/catalog`} className="cardComponentBtn" >BACK</Link> :
+                            null
+                        }
+                    </div>
                 </section>
                 {isOwner &&
                     <div>
-                        <Link to={`/catalog/${props.allId.itemId}`}  className="cardComponentBtn"  >EDIT</Link>
-                        <Link to={'/'}  className="cardComponentBtn" >DELETE</Link>
+                        <Link to={`/catalog/edit/${props.allId.itemId}`} className="cardComponentBtn"  >EDIT</Link>
+                        <Link to={'/'} className="cardComponentBtn" >DELETE</Link>
                     </div>
                 }
                 {!isOwner &&
                     <div>
-                        <Link to={`/catalog/${props.allId.itemId}`}  className="cardComponentBtn" >DETAILS</Link>
+                        {props.styles.size === 'large' ? null :
+                            <Link to={`/catalog/${props.allId.itemId}`} className="cardComponentBtn" >DETAILS</Link>
+                        }
                     </div>
                 }
             </article>
@@ -74,29 +82,29 @@ export default CardComponent
 function imgCheck(key, imgCount, size) {
     let imgRadius = {}
     size = size.toLowerCase()
-    if (key == 1 && imgCount != 1) {
-        if (size == "small" || size == "medium") {
+    if (key === 1 && imgCount !== 1) {
+        if (size === "small" || size === "medium") {
             imgRadius = {
                 "border-top-left-radius": "5px",
                 "border-top-right-radius": "0px"
             };
-        } else if (size == 'large') {
+        } else if (size === 'large') {
             imgRadius = {
                 "border-top-left-radius": "5px",
                 "border-bottom-left-radius": "0px"
             };
         }
-    } else if (key > 1 && imgCount != key) {
+    } else if (key > 1 && imgCount !== key) {
         imgRadius = {
             "border-radius": "0px"
         };
-    } else if (key > 1 && imgCount == key) {
-        if (size == "small" || size == "medium") {
+    } else if (key > 1 && imgCount === key) {
+        if (size === "small" || size === "medium") {
             imgRadius = {
                 "border-top-left-radius": "0px",
                 "border-top-right-radius": "5px"
             };
-        } else if (size == 'large') {
+        } else if (size === 'large') {
             imgRadius = {
                 "border-radius": "0px"
             };

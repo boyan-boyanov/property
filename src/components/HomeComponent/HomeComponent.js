@@ -34,7 +34,7 @@ export default function HomeComponent() {
     return (
         <>
             <HomeHeader />
-            <CardComponent styles={styles} />
+            {/* <CardComponent styles={styles} /> */}
         </>
     )
 }
