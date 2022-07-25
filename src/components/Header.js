@@ -1,22 +1,36 @@
 import { CgMenuCheese } from 'react-icons/cg';
 import "./header.css"
-import { useState } from "react";
-import { doUserLogOut, updateUser} from '../services/userServices';
-import {Link} from 'react-router-dom'
+import { useEffect, useState, useContext } from "react";
+import { doUserLogOut, updateUser } from '../services/userServices';
+import { Link } from 'react-router-dom'
+import { UserContext } from '../contexts/UserContext';
+
 
 export default function Header() {
   const [isNavExpanded, setIsNavExpanded] = useState(false)
+  const [isLoged, setIsLoged] = useState()
 
-// function update(e){
-//   e.preventDefault()
-//   console.log("test");
-//   updateUser()
-// }
+  const value = useContext(UserContext)
 
-function logOut(e){
-  e.preventDefault()
-  doUserLogOut()
-}
+  useEffect(() => {
+    if (value.test) {
+      setIsLoged(true)
+    } else {
+      setIsLoged(false)
+    }
+
+  }, [value.test])
+  // function update(e){
+  //   e.preventDefault()
+  //   console.log("test");
+  //   updateUser()
+  // }
+
+  function logOut(e) {
+    e.preventDefault()
+    doUserLogOut()
+    value.setTest(false)
+  }
 
   return (
     <header>
@@ -47,18 +61,26 @@ function logOut(e){
             <li>
               <Link to="/about">About</Link>
             </li>
-            <li>
-              <Link to="/create">Create</Link>
-            </li>
-            <li>
-              <Link to="/login">login</Link>
-            </li>
-            <li>
-              <Link  to="/register">register</Link>
-            </li>
-            <li>
-              <Link to="/logout" onClick={logOut}>logout</Link>
-            </li>
+            {isLoged &&
+              <>
+                <li>
+                  <Link to="/create">Create</Link>
+                </li>
+                <li>
+                  <Link to="/logout" onClick={logOut}>logout</Link>
+                </li>
+              </>
+            }
+            {!isLoged &&
+              <>
+                <li>
+                  <Link to="/login">login</Link>
+                </li>
+                <li>
+                  <Link to="/register">register</Link>
+                </li>
+              </>
+            }
           </ul>
         </div>
       </nav>

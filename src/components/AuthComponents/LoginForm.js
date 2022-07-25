@@ -1,5 +1,6 @@
 import React from 'react';
-import { useState } from 'react';
+import { UserContext } from '../../contexts/UserContext';
+import { useState, useContext } from 'react';
 import { loggedIn } from '../../services/userServices';
 import { useNavigate } from 'react-router-dom';
 import './loginForm.css'
@@ -15,6 +16,8 @@ export default function LoginForm({ error }) {
         setDetails(state => ({ ...state, [e.target.name]: e.target.value }), labelError(e.target.name, e.target.value))
     }
 
+    const value = useContext(UserContext)
+          
     function labelError(name, value) {
         if (name === "name") {
             setLabelsErrors(state => ({ ...state, name: !(value.length < 4) }))
@@ -45,6 +48,7 @@ export default function LoginForm({ error }) {
         if (isLoged === "false") {
             setServerError("Username or password not match")
         } else if (isLoged === "create") {
+            value.setTest(true)
             navigate('/catalog')
         }
         if (details.email === adminUser.email && details.password === adminUser.password) {
