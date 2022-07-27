@@ -8,10 +8,7 @@ import CardComponent from '../CardComponent/CardComponent';
 export default function HomeComponent() {
     const [propertis, setProperties] = useState()
 
-    // useEffect(() => {
-    //     //Runs only on the first render
-    //   }, []);
-
+    
     let styles = {
         size: "small",
         cardWidth: "",

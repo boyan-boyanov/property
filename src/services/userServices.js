@@ -29,7 +29,7 @@ export async function register(data) {
 }
 
 export async function loggedIn(data) {
-        console.log(data);
+       // console.log(data);
     try {
         let user = await Parse.User.logIn(data.name, data.password);
         localStorage.setItem("userData", JSON.stringify(user));

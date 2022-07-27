@@ -9,7 +9,7 @@ export const CatalogComponent = () => {
     useEffect(() => {
         async function waitData() {
             const data = await getAll()
-           // console.log(data);
+            // console.log(data);
             setAllData(data.results)
         }
         waitData()
@@ -19,7 +19,7 @@ export const CatalogComponent = () => {
         //const data = (await allData).results;
         console.log(allData);
     }
-   
+
 
     function createProps(x) {
         let pic = ''
@@ -49,8 +49,9 @@ export const CatalogComponent = () => {
     return (
         <div className={'catalog-container'}>
             <h1>Catalog</h1>
-            {allData.map(x => <CardComponent key={x.objectId} styles={createProps(x)} allId={{owner: x.Owner, itemId: x.objectId}}/>)}
-
+            {allData.length > 0 ?
+                 allData.map(x => <CardComponent key={x.objectId} styles={createProps(x)} allId={{ owner: x.Owner, itemId: x.objectId }} />) 
+                : <p className='no-articles'>No Articles yet</p>}
         </div>
     )
 }

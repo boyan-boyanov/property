@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from "react";
 import "./CardComponent.css"
 import { Link } from "react-router-dom";
+import { deleteItem } from "../../services/ItemServices/createService";
+import { useNavigate } from "react-router-dom";
 
 const CardComponent = (props) => {
     const [isOwner, setIsOwner] = useState(false)
+
+    const navigate = useNavigate()
     //const params = useParams()
     // console.log(props);
     useEffect(() => {
@@ -15,6 +19,14 @@ const CardComponent = (props) => {
         }
     }, [props.allId.owner])
     //console.log(props);
+
+    function delteItem(e) {
+        e.preventDefault()
+        deleteItem(props.allId.itemId)
+        navigate('/')
+       // console.log(props.allId.itemId);
+    }
+
     let size = props.styles.size || "small"
     let images = []
     if (props.styles.image) {
@@ -61,7 +73,7 @@ const CardComponent = (props) => {
                 {isOwner &&
                     <div>
                         <Link to={`/catalog/edit/${props.allId.itemId}`} className="cardComponentBtn"  >EDIT</Link>
-                        <Link to={'/'} className="cardComponentBtn" >DELETE</Link>
+                        <Link to={`/catalog`} onClick={delteItem} className="cardComponentBtn" >DELETE</Link>
                     </div>
                 }
                 {!isOwner &&

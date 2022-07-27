@@ -13,11 +13,18 @@ import NotFound from './components/NotFound';
 import { DetailsComponent } from './components/DetailsComponent/DetailsComponent';
 import { EditComponent } from './components/EditComponent/EditComponent';
 import { UserContext } from './contexts/UserContext';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 function App() {
 const [test, setTest] = useState()
-
+useEffect(() => {
+  const isLogged = localStorage.getItem('userData')
+  if(isLogged){
+    setTest(true)
+  }else{
+    setTest(false)
+  }
+})
   return (
     <>
       <UserContext.Provider value={{test, setTest}}>

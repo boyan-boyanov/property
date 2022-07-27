@@ -1,0 +1,76 @@
+
+
+ .comments, .comments-form {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    margin: 100px 20%;
+    gap: 30px;
+    width: 500px;
+}
+
+.comments-article-div{
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+    gap: 20px;
+}
+
+.comments article, .comments-form{
+    border: 1px solid gold;
+    background-color: rgb(228, 237, 240);
+    color: black;;
+    padding: 20px;
+}
+
+.comments article h3 {
+    border-bottom: 1px solid gold;
+    text-transform: capitalize;
+}
+
+.comments article footer {
+    border-top: 1px solid gold;
+}
+
+form textarea {
+    height: 200px;
+    background-color: rgb(228, 237, 240);
+    border: 1px solid gold;
+    resize: none;
+    color: black;
+}
+
+form button {
+    background-color: #EA5B1B;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 0;
+    color: #FFFFFF;
+}
+
+form button:hover{
+    background-color: #25D366;
+    transition: 300ms ease-in-out;
+}
+
+form button:hover:disabled{
+    background-color: red;
+    transition: 300ms ease-in-out;
+}
+
+form textarea:focus{
+    outline: none;
+}
+
+.addFavorite, .edit {
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #EA5B1B;
+    color: #FFFFFF;
+  }
+
+  .addFavorite:hover, .edit:hover{
+    background-color: #25D366;
+    transition: 300ms ease-in-out;
+}
