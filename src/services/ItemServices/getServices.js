@@ -67,3 +67,26 @@ export async function getOne(id){
         }
      
 }
+
+export async function getByOwner ()  {
+  // 'Post' is just an arbitrary class, replace it with your custom class
+  const query = new Parse.Query('Properties');
+
+  // Finds objects whose title is equal to 'Documentation'
+  query.equalTo('Owner', 'U7pgXF3Nk3');
+ 
+  const result = []
+
+  try {
+    const results = await query.find();
+    for(let object of results) {
+      const current = JSON.stringify(object);
+      result.push(JSON.parse(current))
+     // console.log(JSON.parse(current));
+    }
+    return result
+    //console.log(`ParseObjects found: ${JSON.stringify(results)}`);
+  } catch (error) {
+   // console.log(`ParseObjects found: ${JSON.stringify(results)}`);
+  }
+}

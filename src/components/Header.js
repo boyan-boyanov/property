@@ -14,19 +14,7 @@ const Header = () => {
   const {userLogin} = useContext(AuthContext)
   const value = useContext(AuthContext)
 console.log(auth.username);
-  // useEffect(() => {
-  //   if (value.loggedUser) {
-  //     setIsLoged(true)
-  //   } else {
-  //     setIsLoged(false)
-  //   }
-
-  // }, [value.loggedUser])
-  // function update(e){
-  //   e.preventDefault()
-  //   console.log("test");
-  //   updateUser()
-  // }
+ 
   const navigate = useNavigate()
 
   function logOut(e) {
@@ -69,6 +57,9 @@ console.log(auth.username);
               <>
                 <li>
                   <Link to="/create">Create</Link>
+                </li>
+                <li>
+                  <Link to={`/profile`}>Profile</Link>
                 </li>
                 <li>
                   <Link to="/logout" onClick={logOut}>logout</Link>

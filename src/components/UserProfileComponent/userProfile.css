@@ -1,0 +1,161 @@
+.user-profile-container {
+    position: relative;
+}
+
+
+.user-profile-container__back {
+    min-height: 600px;
+    background-image: url("https://raw.githubusercontent.com/creativetimofficial/argon-dashboard/gh-pages/assets-old/img/theme/profile-cover.jpg");
+    background-size: cover;
+    background-position: center top;
+    position: relative;
+    padding-bottom: 8rem;
+    align-items: center;
+    display: flex;
+}
+
+.user-profile-container__mask {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transition: all .15s ease;
+    opacity: .9 !important;
+    background: linear-gradient(87deg, #172b4d 0, #1a174d 100%)
+}
+
+.user-profile-container__item {
+    align-items: center;
+    display: flex;
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+.user-profile-container__row {
+    display: flex;
+    margin-right: -15px;
+    margin-left: -15px;
+    flex-wrap: wrap;
+}
+
+.user-profile-container__col {
+    position: relative;
+    width: 100%;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+.user-profile-container__h1 {
+    color: #fff;
+    font-size: 2.75rem;
+    font-weight: 600;
+    line-height: 1.5;
+    margin-bottom: .5rem;
+}
+
+.user-profile-container__p {
+    margin-bottom: 3rem;
+    color: #fff;
+    margin-top: 0;
+    font-size: 1rem;
+    font-weight: 300;
+    line-height: 1.7;
+}
+
+.user-profile-container__a {
+    cursor: pointer;
+    font-size: .875rem;
+    position: relative;
+    transition: all .15s ease;
+    letter-spacing: .025em;
+    text-transform: none;
+    will-change: transform;
+    color: #fff;
+    border-color: #11cdef;
+    background-color: #11cdef;
+    box-shadow: 0 4px 6px rgba(50, 50, 93, .11), 0 1px 3px rgba(0, 0, 0, .08);
+    font-weight: 600;
+    line-height: 1.5;
+    display: inline-block;
+    padding: .625rem 1.25rem;
+    text-align: center;
+    vertical-align: middle;
+    white-space: nowrap;
+    border: 1px solid transparent;
+    text-decoration: none;
+}
+
+
+.user-profile-card {
+    position: absolute;
+    border: 1px solid #fff;
+    min-width: 300px;
+    min-height: 400px;
+    top: 150px;
+    right: 100px;
+}
+
+.card-profile-card__imgContainer {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.card-profile-card__divimg {
+    position: absolute;
+    border: 1px solid red;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    top: -100px;
+    left: 50px
+}
+
+.card-profile-card__img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    overflow: hidden;
+    background-image: url("./defaultProfileImg/default-avatar.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.card-profile-card__info {
+    width: 250px;
+    min-height: 100px;
+    position: absolute;
+    left: 20px;
+    top: 150px;
+}
+
+.card-profile-card__p {
+    color: #fff;
+    margin-top: 20px;
+}
+
+
+@media (min-width: 992px) {
+    .user-profile-container__col {
+        max-width: 58.33333%;
+        flex: 0 0 58.33333%;
+    }
+}
+
+
+@media (min-width: 768px) {
+    .user-profile-container__item {
+        padding-right: 39px;
+        padding-left: 39px;
+    }
+
+    .user-profile-container__col {
+        max-width: 83.33333%;
+        flex: 0 0 83.33333%;
+    }
+}

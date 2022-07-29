@@ -4,6 +4,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import LoginForm from './components/AuthComponents/LoginForm'
 import RegisterForm from './components/AuthComponents/RegisterForm';
+import UserProfile from './components/UserProfileComponent/UserProfile';
 import { Routes, Route } from 'react-router-dom'
 import HomeComponent from './components/HomeComponent/HomeComponent';
 import { CatalogComponent } from './components/CatalogComponent/CatalogComponent';
@@ -22,18 +23,16 @@ function App() {
   const userLogin = (authData) => {
     setAuth(authData)
   }
-  // useEffect(() => {
-  //   const isLogged = localStorage.getItem('userData')
-  //   if (isLogged) {
-  //     setLoggedUser(true)
-  //   } else {
-  //     setLoggedUser(false)
-  //   }
-  // })
-  
+  useEffect(() => {
+    const isLogged = localStorage.getItem('userData')
+    if (isLogged) {
+      setAuth(JSON.parse(localStorage.getItem('userData')))
+    }
+  },[])
+
   return (
     <>
-      <AuthContext.Provider value={{ auth, userLogin}}>
+      <AuthContext.Provider value={{ auth, userLogin }}>
         <Header />
 
         <Routes>
@@ -48,7 +47,7 @@ function App() {
           <Route path='/catalog' element={<CatalogComponent />} />
           <Route path='/catalog/:objectId' element={<DetailsComponent />} />
           <Route path='/catalog/edit/:objectId' element={<EditComponent />} />
-
+          <Route path='/profile' element={<UserProfile/>}/>
           <Route path='*' element={<NotFound />} />
         </Routes>
 

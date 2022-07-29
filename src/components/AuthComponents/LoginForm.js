@@ -18,7 +18,7 @@ import './loginForm.css'
         setDetails(state => ({ ...state, [e.target.name]: e.target.value }), labelError(e.target.name, e.target.value))
     }
 
-    // const value = useContext(UserContext)
+  
 
     function labelError(name, value) {
         if (name === "name") {
@@ -51,14 +51,9 @@ import './loginForm.css'
             setServerError("Username or password not match")
         } else {
             userLogin(JSON.parse(isLogedData))
-            //value.setLoggedUser(true)
-            navigate('/catalog')
+                       navigate('/catalog')
         }
-        // if (details.email === adminUser.email && details.password === adminUser.password) {
-        //     // navigate('/catalog')
-        // } else {
-        //     //setServerError("Username or password not match")           
-        // }
+      
 
     }
 

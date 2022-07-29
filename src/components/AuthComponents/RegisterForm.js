@@ -6,7 +6,7 @@ import { AuthContext } from '../../contexts/UserContext';
 
 import './loginForm.css'
 
-const RegisterForm = ({ Login, error }) => {
+const RegisterForm = ({ error }) => {
     const EMAIL_PATTERN = /^([a-zA-Z0-9])+@([a-zA-Z0-9])+\.([a-zA-Z0-9])+$/
     const [details, setDetails] = useState({ name: '', email: '', password: '', repass: '' })
     const [inputError, setInputError] = useState({})
@@ -56,7 +56,6 @@ const RegisterForm = ({ Login, error }) => {
 
     async function submitHandler(e) {
         e.preventDefault();
-        // console.log(details);
         const isRegistered = await register(details)
         console.log(isRegistered);
 
@@ -66,16 +65,9 @@ const RegisterForm = ({ Login, error }) => {
             setServerError("Name or email alredy exist")
         } else {
             userLogin(JSON.parse(isLogedData))
-            //value.setLoggedUser(true)
             navigate('/catalog')
         }
 
-        //setServerError(isRegistered)
-        // if (isRegistered === "false") {
-        //     setServerError(isRegistered)
-        // }else {
-        //     navigate('/catalog')
-        // }
     }
 
     return (
