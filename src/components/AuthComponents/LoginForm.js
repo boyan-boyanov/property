@@ -1,23 +1,25 @@
 import React from 'react';
-import { UserContext } from '../../contexts/UserContext';
+import { AuthContext } from '../../contexts/UserContext';
 import { useState, useContext } from 'react';
 import { loggedIn } from '../../services/userServices';
 import { useNavigate } from 'react-router-dom';
 import './loginForm.css'
 
-export default function LoginForm({ error }) {
+ const LoginForm = ({ error }) => {
     const [details, setDetails] = useState({ name: '', password: '' })
     const [inputError, setInputError] = useState({ name: '', password: '' })
     const [labelsErrors, setLabelsErrors] = useState({ name: '', password: '' })
     const [serverError, setServerError] = useState('')
     const navigate = useNavigate()
 
+    const {userLogin} = useContext(AuthContext)
+
     function loginHandler(e) {
         setDetails(state => ({ ...state, [e.target.name]: e.target.value }), labelError(e.target.name, e.target.value))
     }
 
-    const value = useContext(UserContext)
-          
+    // const value = useContext(UserContext)
+
     function labelError(name, value) {
         if (name === "name") {
             setLabelsErrors(state => ({ ...state, name: !(value.length < 4) }))
@@ -36,26 +38,27 @@ export default function LoginForm({ error }) {
         };
     }
 
-    const adminUser = {
-        email: "admin@admin.com",
-        password: "admin123"
-    }
+    // const adminUser = {
+    //     email: "admin@admin.com",
+    //     password: "admin123"
+    // }
 
     async function submitHandler(e) {
         e.preventDefault();
-        const isLoged = await loggedIn(details)
-        console.log(isLoged);
-        if (isLoged === "false") {
+        const isLogedData = await loggedIn(details)
+        console.log(isLogedData);
+        if (isLogedData === "false") {
             setServerError("Username or password not match")
-        } else if (isLoged === "create") {
-            value.setTest(true)
+        } else {
+            userLogin(JSON.parse(isLogedData))
+            //value.setLoggedUser(true)
             navigate('/catalog')
         }
-        if (details.email === adminUser.email && details.password === adminUser.password) {
-            // navigate('/catalog')
-        } else {
-            //setServerError("Username or password not match")           
-        }
+        // if (details.email === adminUser.email && details.password === adminUser.password) {
+        //     // navigate('/catalog')
+        // } else {
+        //     //setServerError("Username or password not match")           
+        // }
 
     }
 
@@ -90,3 +93,4 @@ export default function LoginForm({ error }) {
     )
 }
 
+export default LoginForm

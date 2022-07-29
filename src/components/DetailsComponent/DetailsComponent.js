@@ -13,6 +13,8 @@ export const DetailsComponent = () => {
     const params = useParams()
     const [itemData, setItemData] = useState({})
     const [comments, setComments] = useState({ username: '', comments: '', commentId: '', owner: '' })
+    const [commentError, setCommentError] = useState(true)
+    const [showError, setShowError] = useState(false)
 
     useEffect(() => {
         async function waitData() {
@@ -56,12 +58,7 @@ export const DetailsComponent = () => {
 
     const addCommetHandler = (e) => {
         e.preventDefault()
-        // const randomID = v4()
-        // console.log(`random >>> ${randomID}`);
-        // const id = makeid(8)
-        // console.log(id);
-        // setComments(state =>({...state, commentId: randomID}))
-        console.log(comments);
+             
         const newData = itemData.comments
         newData.push(comments)
         console.log(newData);
@@ -71,7 +68,14 @@ export const DetailsComponent = () => {
         editItem(itemData, params.objectId)
         console.log(itemData);
         console.log(itemData.Owner);
+        setShowError(false)
+        setComments(state => ({...state, comments: ""}))
+    }
 
+    const showCommentError = (e) => {
+        if (comments.comments.length < 10) {
+            setShowError(true)
+        }
     }
 
     const onChange = (e) => {
@@ -88,18 +92,12 @@ export const DetailsComponent = () => {
             }
         }))
 
-    }
-
-    function makeid(length) {
-        var result = '';
-        var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-        var charactersLength = characters.length;
-        for (var i = 0; i < length; i++) {
-            result += characters.charAt(Math.floor(Math.random() *
-                charactersLength));
-        }
-        return result;
-    }
+        if (e.target.value.length >= 10) {
+            setCommentError(false)
+        } else {
+            setCommentError(true)
+        }       
+    }    
 
     return (
         //<button onClick={showAll}>UTUTUTUTUT</button>
@@ -109,18 +107,12 @@ export const DetailsComponent = () => {
                 <h3>Comments:</h3>
                 <article >
                     {itemData.comments?.map(x =>
-                        <div key={x.commentId}>
-                            <h3>{x.username}</h3>
-                            <p>{x.comments}</p>
-                            <div className='comments-article-div'>
-                                <button className="addFavorite"
-                                >Edit</button>
-                                <button className="edit"
-                                >Delete</button>
-                            </div>
+                        <div className='comments__commetWrapper' key={x.commentId}>
+                            <h3 className='comments__commetWrapper__username'>{x.username}</h3>
+                            <p className='comments__commetWrapper__message'>{x.comments}</p>                            
                         </div>
                     )}
-                    {!itemData.comments.length > 0 &&
+                    {!itemData.comments?.length > 0 &&
                         <div className='noCommets'>
                             <p className='noComments__p'>No commets for this property</p>
                             <p className='noComments__p'>Add first comment.</p>
@@ -131,9 +123,11 @@ export const DetailsComponent = () => {
 
             <form id="comments" className='comments-form' onSubmit={addCommetHandler}>
                 <label htmlFor="comments">Post new comment:</label>
-                <textarea name="comments" required onChange={onChange}
-                    cols="30" rows="10" value={comments.comments} />
-                <button type="submit" >Add comment</button>
+                {showError &&
+                    <p className='showCommentError'>Comment must be at least 10 characters</p>}
+                <textarea className='comments__textarea' name="comments" required onChange={onChange} onBlur={showCommentError}
+                    cols="30" rows="10" value={comments.comments} placeholder="Comment must be at least 10 characters" />
+                <button type="submit" disabled={commentError}>Add comment</button>
             </form>
         </>
     )

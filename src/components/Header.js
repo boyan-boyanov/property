@@ -3,33 +3,37 @@ import "./header.css"
 import { useEffect, useState, useContext } from "react";
 import { doUserLogOut, updateUser } from '../services/userServices';
 import { Link } from 'react-router-dom'
-import { UserContext } from '../contexts/UserContext';
+import { AuthContext } from '../contexts/UserContext';
+import { useNavigate } from 'react-router-dom';
 
 
-export default function Header() {
+const Header = () => {
   const [isNavExpanded, setIsNavExpanded] = useState(false)
   const [isLoged, setIsLoged] = useState()
+  const { auth } = useContext(AuthContext)
+  const {userLogin} = useContext(AuthContext)
+  const value = useContext(AuthContext)
+console.log(auth.username);
+  // useEffect(() => {
+  //   if (value.loggedUser) {
+  //     setIsLoged(true)
+  //   } else {
+  //     setIsLoged(false)
+  //   }
 
-  const value = useContext(UserContext)
-
-  useEffect(() => {
-    if (value.test) {
-      setIsLoged(true)
-    } else {
-      setIsLoged(false)
-    }
-
-  }, [value.test])
+  // }, [value.loggedUser])
   // function update(e){
   //   e.preventDefault()
   //   console.log("test");
   //   updateUser()
   // }
+  const navigate = useNavigate()
 
   function logOut(e) {
     e.preventDefault()
     doUserLogOut()
-    value.setTest(false)
+    userLogin({})
+    navigate('/')
   }
 
   return (
@@ -61,7 +65,7 @@ export default function Header() {
             <li>
               <Link to="/about">About</Link>
             </li>
-            {isLoged &&
+            {auth.username &&
               <>
                 <li>
                   <Link to="/create">Create</Link>
@@ -71,7 +75,7 @@ export default function Header() {
                 </li>
               </>
             }
-            {!isLoged &&
+            {!auth.username &&
               <>
                 <li>
                   <Link to="/login">login</Link>
@@ -87,3 +91,5 @@ export default function Header() {
     </header>
   );
 }
+
+export default Header

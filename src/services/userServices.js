@@ -1,17 +1,17 @@
 import Parse from 'parse/dist/parse.min.js';
 
-
 const PARSE_APPLICATION_ID = '62MiP8VdJxtvy35FJ52VYDC5LDKk5asRiGMoiLPd';
 const PARSE_HOST_URL = 'https://parseapi.back4app.com/';
 const PARSE_JAVASCRIPT_KEY = 'V5XM1OCDkmjasMI30CAnMnpsgkIBHMvzTNfoCBO4';
 Parse.initialize(PARSE_APPLICATION_ID, PARSE_JAVASCRIPT_KEY);
 Parse.serverURL = PARSE_HOST_URL;
 
+
 export async function register(data) {
     console.log(data);
     
-    const autoLgoinData = {
-        name: data.email,
+    const autoLoginData = {
+        name: data.name,
         password: data.password
     }
     const user = new Parse.User();
@@ -21,19 +21,19 @@ export async function register(data) {
     try {
         let userResult = await user.signUp();
         console.log('User signed up', userResult);
-        loggedIn(autoLgoinData)
-        return "create"
+      // const loginData = loggedIn(autoLoginData)
+        return autoLoginData
     } catch (error) {
         return "false";
     }
 }
 
 export async function loggedIn(data) {
-       // console.log(data);
+        console.log(data);
     try {
         let user = await Parse.User.logIn(data.name, data.password);
         localStorage.setItem("userData", JSON.stringify(user));
-        return 'create';
+        return JSON.stringify(user);
        
     } catch (error) {
         return 'false';
@@ -41,12 +41,14 @@ export async function loggedIn(data) {
 }
 
 export async function doUserLogOut() {
+    
     try {
         await Parse.User.logOut();
         // To verify that current user is now empty, currentAsync can be used
         const currentUser = await Parse.User.current();
         if (currentUser === null) {
-            alert('Success! No user is logged in anymore!');
+            console.log('Success! No user is logged in anymore!');
+            
         }
         // Update state variable holding current user
         getCurrentUser();

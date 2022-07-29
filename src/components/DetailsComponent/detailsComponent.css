@@ -23,16 +23,7 @@
     padding: 20px;
 }
 
-.comments article h3 {
-    border-bottom: 1px solid gold;
-    text-transform: capitalize;
-}
-
-.comments article footer {
-    border-top: 1px solid gold;
-}
-
-form textarea {
+.comments__textarea {
     height: 200px;
     background-color: rgb(228, 237, 240);
     border: 1px solid gold;
@@ -73,4 +64,24 @@ form textarea:focus{
   .addFavorite:hover, .edit:hover{
     background-color: #25D366;
     transition: 300ms ease-in-out;
+}
+
+.showCommentError {
+    color: red;
+}
+
+.comments__commetWrapper{
+    margin-bottom: 15px;
+    border: 1px solid gold;
+}
+
+.comments__commetWrapper__username {
+    border-bottom: 1px dashed grey;
+    text-transform: capitalize;
+    padding: 5px 0;
+    text-align: center;
+}
+
+.comments__commetWrapper__message{
+    padding: 5px 15px;
 }

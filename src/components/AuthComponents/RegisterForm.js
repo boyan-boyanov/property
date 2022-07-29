@@ -1,16 +1,20 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { register } from '../../services/userServices';
+import { loggedIn, register } from '../../services/userServices';
+import { AuthContext } from '../../contexts/UserContext';
+
 import './loginForm.css'
 
-export default function RegisterForm({ Login, error }) {
+const RegisterForm = ({ Login, error }) => {
     const EMAIL_PATTERN = /^([a-zA-Z0-9])+@([a-zA-Z0-9])+\.([a-zA-Z0-9])+$/
     const [details, setDetails] = useState({ name: '', email: '', password: '', repass: '' })
     const [inputError, setInputError] = useState({})
     const [labelsErrors, setLabelsErrors] = useState({ name: '', email: '', password: '', repass: '' })
     const [serverError, setServerError] = useState('')
     const navigate = useNavigate()
+    const { userLogin } = useContext(AuthContext)
+
 
     function registerHandler(e) {
         setDetails(state => ({ ...state, [e.target.name]: e.target.value }), labelError(e.target.name, e.target.value))
@@ -54,13 +58,24 @@ export default function RegisterForm({ Login, error }) {
         e.preventDefault();
         // console.log(details);
         const isRegistered = await register(details)
+        console.log(isRegistered);
 
-        setServerError(isRegistered)
-        if (isRegistered === "create") {
+        const isLogedData = await loggedIn(isRegistered)
+        console.log(isLogedData);
+        if (isLogedData === "false") {
+            setServerError("Name or email alredy exist")
+        } else {
+            userLogin(JSON.parse(isLogedData))
+            //value.setLoggedUser(true)
             navigate('/catalog')
-        }else if(isRegistered === "false"){
-            setServerError(isRegistered)
         }
+
+        //setServerError(isRegistered)
+        // if (isRegistered === "false") {
+        //     setServerError(isRegistered)
+        // }else {
+        //     navigate('/catalog')
+        // }
     }
 
     return (
@@ -68,7 +83,7 @@ export default function RegisterForm({ Login, error }) {
             <form className='basicForm' onSubmit={submitHandler}>
                 <div className='form-inner'>
                     <h2>Register</h2>
-                    {serverError !== "" && <div className='loginError'>Name or email alredy exist</div>}
+                    {serverError !== "" && <div className='loginError'>{serverError}</div>}
                     <div className='form-group'>
                         <label htmlFor="name" className={labelsErrors.name ? 'basicForm__label-error' : ''}>Name:</label>
                         <input type="name" name="name" id="name" onChange={registerHandler} value={details.name} onBlur={inputValidate} />
@@ -112,3 +127,4 @@ export default function RegisterForm({ Login, error }) {
     )
 }
 
+export default RegisterForm

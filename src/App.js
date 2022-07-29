@@ -2,38 +2,48 @@ import './App.css';
 import './index.css'
 import Header from './components/Header';
 import Footer from './components/Footer';
-import CardComponent from './components/CardComponent/CardComponent'
 import LoginForm from './components/AuthComponents/LoginForm'
 import RegisterForm from './components/AuthComponents/RegisterForm';
-import CreatePropertyForm from './components/Properties/CreatePropertyForm';
 import { Routes, Route } from 'react-router-dom'
 import HomeComponent from './components/HomeComponent/HomeComponent';
 import { CatalogComponent } from './components/CatalogComponent/CatalogComponent';
 import NotFound from './components/NotFound';
 import { DetailsComponent } from './components/DetailsComponent/DetailsComponent';
 import { EditComponent } from './components/EditComponent/EditComponent';
-import { UserContext } from './contexts/UserContext';
-import { useEffect, useState } from 'react';
+import { AuthContext } from './contexts/UserContext';
+import { lazy, Suspense, useEffect, useState } from 'react';
+const CreatePropertyForm = lazy(() => import('./components/Properties/CreatePropertyForm'))
 
+// import CreatePropertyForm from './components/Properties/CreatePropertyForm';
 function App() {
-const [test, setTest] = useState()
-useEffect(() => {
-  const isLogged = localStorage.getItem('userData')
-  if(isLogged){
-    setTest(true)
-  }else{
-    setTest(false)
+  //const [loggedUser, setLoggedUser] = useState()
+  const [auth, setAuth] = useState({})
+
+  const userLogin = (authData) => {
+    setAuth(authData)
   }
-})
+  // useEffect(() => {
+  //   const isLogged = localStorage.getItem('userData')
+  //   if (isLogged) {
+  //     setLoggedUser(true)
+  //   } else {
+  //     setLoggedUser(false)
+  //   }
+  // })
+  
   return (
     <>
-      <UserContext.Provider value={{test, setTest}}>
+      <AuthContext.Provider value={{ auth, userLogin}}>
         <Header />
 
         <Routes>
           <Route path='/login' element={<LoginForm />} />
           <Route path='/register' element={<RegisterForm />} />
-          <Route path='/create' element={<CreatePropertyForm />} />
+          <Route path='/create' element={
+            <Suspense fallback={<span>Loading...</span>}>
+              <CreatePropertyForm />
+            </Suspense>
+          } />
           <Route path='/' element={<HomeComponent />} />
           <Route path='/catalog' element={<CatalogComponent />} />
           <Route path='/catalog/:objectId' element={<DetailsComponent />} />
@@ -43,7 +53,7 @@ useEffect(() => {
         </Routes>
 
         <Footer />
-      </UserContext.Provider>
+      </AuthContext.Provider>
     </>
   );
 }
