@@ -21,7 +21,10 @@ export const DetailsComponent = () => {
             setItemData(data)
         }
         waitData()
+
     }, [params.objectId]);
+
+
 
 
     function createProps(x) {
@@ -58,14 +61,14 @@ export const DetailsComponent = () => {
         // const id = makeid(8)
         // console.log(id);
         // setComments(state =>({...state, commentId: randomID}))
-          console.log(comments);
+        console.log(comments);
         const newData = itemData.comments
         newData.push(comments)
         console.log(newData);
         setItemData(state => ({
             ...state, ...{ comments: newData }
         }))
-         editItem(itemData, params.objectId)
+        editItem(itemData, params.objectId)
         console.log(itemData);
         console.log(itemData.Owner);
 
@@ -105,15 +108,24 @@ export const DetailsComponent = () => {
             <section className="comments">
                 <h3>Comments:</h3>
                 <article >
-                    <h3>Owner Name</h3>
-                    <p>Comment</p>
-                    <footer>comment date</footer>
-                    <div className='comments-article-div'>
-                        <button className="addFavorite"
-                        >Edit</button>
-                        <button className="edit"
-                        >Delete</button>
-                    </div>
+                    {itemData.comments?.map(x =>
+                        <div key={x.commentId}>
+                            <h3>{x.username}</h3>
+                            <p>{x.comments}</p>
+                            <div className='comments-article-div'>
+                                <button className="addFavorite"
+                                >Edit</button>
+                                <button className="edit"
+                                >Delete</button>
+                            </div>
+                        </div>
+                    )}
+                    {!itemData.comments.length > 0 &&
+                        <div className='noCommets'>
+                            <p className='noComments__p'>No commets for this property</p>
+                            <p className='noComments__p'>Add first comment.</p>
+                        </div>
+                    }
                 </article >
             </section >
 
