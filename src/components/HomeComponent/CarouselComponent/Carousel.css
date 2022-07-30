@@ -43,11 +43,14 @@
   background-color: rgb(210 210 210 / 31%);
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
+  background-size: cover;
 
 }
 
 .carousel-card-title, .carousel-card-description {
   margin: 5px 0px 5px 10px;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 .carousel-card-title {

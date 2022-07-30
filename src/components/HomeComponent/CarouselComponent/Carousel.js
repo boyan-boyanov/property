@@ -1,9 +1,10 @@
 import { useState, useRef, useEffect } from "react";
+import Parse from 'parse/dist/parse.min.js';
 
 import "./Carousel.css";
+import { cauroselData } from "../../../services/ItemServices/getServices";
 
-const Carousel = (props) => {
-  
+const Carousel = () => {
 
   const cardsClick = () => {
     alert(`You clicked ME !`);
@@ -14,76 +15,39 @@ const Carousel = (props) => {
   const onMouseLeave = () => {
     console.log("You left the card");
   };
-
-  const cards = [
-    {
-      image: "https://picsum.photos/400/300",
-      title: "This is a title",
-      description: "This is a description",
-      clickEvent: cardsClick,
-    },
-    {
-      image: "https://picsum.photos/500/600",
-      title: "This is a second title",
-      description: "This is a  second description",
-      clickEvent: cardsClick,
-    },
-    {
-      image: "https://picsum.photos/200/400",
-      title: "This is a third title",
-      description: "This is a third description",
-      clickEvent: cardsClick,
-    },
-    {
-      image: "https://picsum.photos/700/340",
-      title: "This is a fourth title",
-      description: "This is a fourth description",
-      clickEvent: cardsClick,
-    },
-    {
-      image: "https://picsum.photos/600/300",
-      title: "This is a fifth title",
-      description: "This is a fifth description",
-      clickEvent: cardsClick,
-    },
-    {
-      image: "https://picsum.photos/700/300",
-      title: "This is a sixt title",
-      description: "This is a sixt description",
-      clickEvent: cardsClick,
-    },
-    {
-      image: "https://cdn.pixabay.com/photo/2012/11/02/13/02/car-63930__480.jpg",
-      title: "This is a seventh title",
-      description: "This is a seventh description",
-      clickEvent: cardsClick,
-    },{
-      image: "https://picsum.photos/500/300",
-      title: "This is a 8 title",
-      description: "This is a 8 description",
-      clickEvent: cardsClick,
-    },{
-      image: "https://picsum.photos/500/300",
-      title: "This is a 9 title",
-      description: "This is a 9 description",
-      clickEvent: cardsClick,
-    },{
-      image: "https://picsum.photos/500/300",
-      title: "This is a 10 title",
-      description: "This is a 10 description",
-      clickEvent: cardsClick,
-    },{
-      image: "https://picsum.photos/500/300",
-      title: "This is a 11 title",
-      description: "This is a 11 description",
-      clickEvent: cardsClick,
-    },
-  ];
-
+ 
   const maxScrollWidth = useRef(0);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [cardsArray, setCardsArray] = useState(cards)
-  
+  const [cardsArray, setCardsArray] = useState([])
+
+
+  useEffect(() => {
+        
+    (async () => {
+        const query = new Parse.Query('Properties');      
+        query.limit(10); // limit to at most 10 results      
+        query.skip(0); // skip the first 10 results      
+        try {
+          const results = await query.find();
+          const data = JSON.stringify(results)         
+          console.log(JSON.parse(data));
+          const result = JSON.parse(data)
+          const sentData = []
+          for (let item of result){
+            const current ={
+              description: item.Description,
+              title: item.RentOrSale,
+              image: item.Images[0]
+            }
+            sentData.push(current)
+          }
+          setCardsArray(sentData)
+        } catch (error) {
+          console.log(`Error: ${JSON.stringify(error)}`);
+        }
+    })()
+     },[])
+
   const carousel = useRef(null);
   let intervalTime = 3500;
   let rotateInterval;
@@ -100,28 +64,11 @@ const Carousel = (props) => {
       carousel.current.offsetWidth * currentIndex <= maxScrollWidth.current
     ) {
       setCurrentIndex((prevState) => prevState + 1);
-      //    const cLength = 4  
-      // const nextEl = cardsArray.slice(0,cLength)
-           
-      //  setCardsArray(old => [...old.slice(cLength), ...nextEl])
-     
-    //  console.log(cardsArray.length);
-    
+         
     } else {
       setCurrentIndex(0);
     }
-  };
-
-  // const slideLeft = () => {
-  //   let slider = document.getElementById("carousel");
-  //   slider.scrollLeft = slider.scrollLeft - 400;
-
-  // };
-
-  // const slideRight = () => {
-  //   let slider = document.getElementById("carousel");
-  //   slider.scrollLeft = slider.scrollLeft + 400;
-  // };
+  }; 
 
   ///auto rotate
   const [autoScroll, setAutoScroll] = useState(true);
@@ -170,7 +117,6 @@ const Carousel = (props) => {
     maxScrollWidth.current = carousel.current
       ? carousel.current.scrollWidth - carousel.current.offsetWidth
       : 0;
-      setCardsArray(props.data)
   }, []);
   /////
 
@@ -197,10 +143,10 @@ const Carousel = (props) => {
               >
                 <div
                   className="carousel-card-image"
-                  style={{ backgroundImage: `url(${card.Images[0]})` }}
+                  style={{ backgroundImage: `url(${card.image})` }}
                 ></div>
-                <p className="carousel-card-title">{card.Description}</p>
-                <p className="carousel-card-description">{card.RentOrSale}</p>
+                <p className="carousel-card-title">{card.title}</p>
+                <p className="carousel-card-description">{card.description}</p>
               </div>
             );
           })}
