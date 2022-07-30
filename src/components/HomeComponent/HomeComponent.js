@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './HomeComponent.module.css'
 import HomeHeader from './HomeHeader'
 import CardComponent from '../CardComponent/CardComponent';
@@ -7,9 +7,10 @@ import Carousel from './CarouselComponent/Carousel';
 
 
 
-export default function HomeComponent() {
+const HomeComponent = () => {
     const [propertis, setProperties] = useState()
     const [pic, setPic] = useState('')
+    const [caroselPic, setCaroselPic] = useState([])
 
     let styles = {
         size: "small",
@@ -28,6 +29,21 @@ export default function HomeComponent() {
         textRows: ""  //not work for now
     }
 
+ useEffect(() => {
+(async () => {
+    const query = new Parse.Query('Properties');      
+    query.limit(10); // limit to at most 10 results      
+    query.skip(0); // skip the first 10 results      
+    try {
+      const results = await query.find();
+      const data = JSON.stringify(results)         
+      console.log(JSON.parse(data));
+      setCaroselPic(JSON.parse(data))
+    } catch (error) {
+      console.log(`Error: ${JSON.stringify(error)}`);
+    }
+})()
+ },[])
 
 async function getSome (e){
     const query = new Parse.Query('Properties');      
@@ -52,3 +68,5 @@ async function getSome (e){
         </>
     )
 }
+
+export default HomeComponent
