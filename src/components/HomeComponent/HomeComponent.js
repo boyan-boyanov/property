@@ -63,7 +63,7 @@ async function getSome (e){
         <>
             <HomeHeader />
             {/* <CardComponent styles={styles} /> */}
-            <Carousel />
+            <Carousel data={caroselPic} />
             <button onClick={getSome}>GET SOME PROPERTIES</button>
         </>
     )

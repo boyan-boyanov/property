@@ -2,7 +2,8 @@ import { useState, useRef, useEffect } from "react";
 
 import "./Carousel.css";
 
-const Carousel = () => {
+const Carousel = (props) => {
+  
 
   const cardsClick = () => {
     alert(`You clicked ME !`);
@@ -82,7 +83,7 @@ const Carousel = () => {
   const maxScrollWidth = useRef(0);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [cardsArray, setCardsArray] = useState(cards)
-
+  
   const carousel = useRef(null);
   let intervalTime = 3500;
   let rotateInterval;
@@ -169,6 +170,7 @@ const Carousel = () => {
     maxScrollWidth.current = carousel.current
       ? carousel.current.scrollWidth - carousel.current.offsetWidth
       : 0;
+      setCardsArray(props.data)
   }, []);
   /////
 
@@ -195,10 +197,10 @@ const Carousel = () => {
               >
                 <div
                   className="carousel-card-image"
-                  style={{ backgroundImage: `url(${card.image})` }}
+                  style={{ backgroundImage: `url(${card.Images[0]})` }}
                 ></div>
-                <p className="carousel-card-title">{card.title}</p>
-                <p className="carousel-card-description">{card.description}</p>
+                <p className="carousel-card-title">{card.Description}</p>
+                <p className="carousel-card-description">{card.RentOrSale}</p>
               </div>
             );
           })}
