@@ -13,7 +13,7 @@ const UserProfile = () => {
     useEffect(() => {
 
         (async () => {
-            const myOffers = await getByOwner()
+            const myOffers = await getByOwner(auth.objectId)
             setOffer(myOffers)
             
         })()
