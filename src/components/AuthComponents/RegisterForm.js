@@ -56,7 +56,10 @@ const RegisterForm = ({ error }) => {
 
     async function submitHandler(e) {
         e.preventDefault();
-        const isRegistered = await register(details)
+        let transformName = details.name.toLocaleLowerCase().charAt(0).toUpperCase() + details.name.toLocaleLowerCase().slice(1)
+                
+        const sendDetails = {...details, name: transformName, email: details.email.toLocaleLowerCase()}
+        const isRegistered = await register(sendDetails)
         console.log(isRegistered);
 
         const isLogedData = await loggedIn(isRegistered)
