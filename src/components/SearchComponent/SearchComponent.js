@@ -13,7 +13,7 @@ export const SearchComponent = () => {
         console.log(query);
         async function waitData() {
             const data = await getByQuery(query)
-             console.log(data);
+             //console.log(data);
             setAllData(data)
         }
         waitData()
@@ -37,6 +37,7 @@ export const SearchComponent = () => {
             title: x.Description,
             subtitle: x.RentOrSale,
             description: `${x.Type} for ${x.RentOrSale},  price: ${x.Price} $`,
+            image: pic,
         }
     }
 
@@ -45,7 +46,7 @@ export const SearchComponent = () => {
             <h1>Result of your serach: {query}</h1>
             {allData.length > 0 ?
                 allData.map(x => <CardComponent key={x.objectId} styles={createProps(x)} allId={{ owner: x.Owner, itemId: x.objectId }} />)
-                : <p className='no-articles'>No Articles yet</p>}
+                : <p className='no-articles'>Sorry, we have no properties matching these criteria!</p>}
         </div>
     )
 }

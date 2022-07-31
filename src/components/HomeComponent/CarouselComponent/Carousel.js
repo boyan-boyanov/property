@@ -12,10 +12,10 @@ const navigate = useNavigate()
     navigate(`/catalog/${e.target.id}`)
   };
   const onMouseOver = () => {
-    console.log("You passed over");
+    //console.log("You passed over");
   };
   const onMouseLeave = () => {
-    console.log("You left the card");
+   // console.log("You left the card");
   };
  
   const maxScrollWidth = useRef(0);
@@ -33,7 +33,7 @@ const navigate = useNavigate()
         try {
           const results = await query.find();
           const data = JSON.stringify(results)         
-          console.log(JSON.parse(data));
+          //console.log(JSON.parse(data));
           const result = JSON.parse(data)
           const sentData = []
           for (let item of result){

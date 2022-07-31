@@ -13,7 +13,7 @@ const Header = () => {
   const { auth } = useContext(AuthContext)
   const {userLogin} = useContext(AuthContext)
   const value = useContext(AuthContext)
-console.log(auth.username);
+//console.log(auth.username);
  
   const navigate = useNavigate()
 

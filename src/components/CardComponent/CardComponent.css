@@ -96,9 +96,27 @@
     text-overflow: ellipsis;
 }
 
+@media screen and (max-width: 850px) {
+    .CardComponent__article.medium {
+
+        width: 500px !important;
+        height: 350px;
+        margin: 5vw 20vw;
+    }
+
+    .CardComponent__bottom.medium div {
+        width: 100%;
+        position: absolute;
+        top: 270px
+    }
+}
 
 /*-------------------------------------------------------------------------------------------*/
 /* Style for large card*/
+.CardComponent__containerlarge {
+    margin: 10vw
+}
+
 .CardComponent__article.large {
     display: flex;
     flex-direction: row;
@@ -170,6 +188,21 @@
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+@media screen and (max-width: 1230px) {
+    .CardComponent__article.large {
+        display: flex;
+        flex-direction: row;
+        width: 700px !important;
+        height: 300px;
+        border: 1px solid black;
+        border-radius: 5px;
+        background-color: rgb(228, 237, 240);
+        box-shadow: 0px 6px 40px -2px rgba(0, 0, 0, 0.67);
+        -webkit-box-shadow: 0px 6px 40px -2px rgba(0, 0, 0, 0.67);
+        -moz-box-shadow: 0px 6px 40px -2px rgba(0, 0, 0, 0.67);
+    }
 }
 
 

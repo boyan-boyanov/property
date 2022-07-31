@@ -65,7 +65,7 @@ const CardComponent = (props) => {
                     <h1 style={titleColor} className={"CardComponent__title " + props.styles.size}>{props.styles.title}</h1>
                     <p style={descriptionColor} className={"CardComponent__info " + props.styles.size}>{props.styles.description}</p>
                     <div>
-                        {props.styles.size === 'large' ? <Link to={`/catalog`} className="cardComponentBtn" >BACK</Link> :
+                        {(props.styles.size === 'large' || props.styles.size === 'medium') ? <Link to={`/catalog`} className="cardComponentBtn" >BACK</Link> :
                             null
                         }
                     </div>
@@ -78,7 +78,7 @@ const CardComponent = (props) => {
                 }
                 {!isOwner &&
                     <div>
-                        {props.styles.size === 'large' ? null :
+                        {(props.styles.size === 'large' || props.styles.size === 'medium') ? null :
                             <Link to={`/catalog/${props.allId.itemId}`} className="cardComponentBtn" >DETAILS</Link>
                         }
                     </div>

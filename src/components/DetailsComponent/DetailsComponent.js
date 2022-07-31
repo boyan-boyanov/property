@@ -1,12 +1,11 @@
 import CardComponent from '../CardComponent/CardComponent';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import { getOne } from '../../services/ItemServices/getServices';
 import './detailsComponent.css'
 import { editItem } from '../../services/ItemServices/createService';
 import { v4 } from 'uuid'
-
-
+import { AuthContext } from '../../contexts/UserContext';
 
 
 export const DetailsComponent = () => {
@@ -15,6 +14,18 @@ export const DetailsComponent = () => {
     const [comments, setComments] = useState({ username: '', comments: '', commentId: '', owner: '' })
     const [commentError, setCommentError] = useState(true)
     const [showError, setShowError] = useState(false)
+    const [isMobile, setIsMobile] = useState(window.innerWidth < 850)
+
+    const { auth } = useContext(AuthContext)
+
+    useEffect(() => {
+        window.addEventListener("resize", () => {
+            const ismobile = window.innerWidth < 850;
+            if (ismobile !== isMobile) {
+                setIsMobile(ismobile)
+            }
+        }, false)
+    }, [isMobile])
 
     useEffect(() => {
         async function waitData() {
@@ -26,8 +37,7 @@ export const DetailsComponent = () => {
 
     }, [params.objectId]);
 
-
-
+  
 
     function createProps(x) {
         let pic = ''
@@ -39,26 +49,18 @@ export const DetailsComponent = () => {
             pic = pic.trim()
         }
         return {
-            size: "large",
+            size: isMobile ? "medium" : "large",
             cardWidth: "1000px",
-            cardHeight: "",
-            background: "",
             title: itemData.Description,
-            titleShadow: "",
-            titleColor: "",
             subtitle: itemData.RentOrSale,
             description: `${itemData.Type} for ${itemData.RentOrSale},  price: ${itemData.Price} $`,
-            descriptionColor: "",
             image: pic,
-            subtitleColor: "",
-            subtitleBackground: "",
-            textRows: ""  //not work for now
         }
     }
 
     const addCommetHandler = (e) => {
         e.preventDefault()
-             
+
         const newData = itemData.comments
         newData.push(comments)
         console.log(newData);
@@ -69,7 +71,7 @@ export const DetailsComponent = () => {
         console.log(itemData);
         console.log(itemData.Owner);
         setShowError(false)
-        setComments(state => ({...state, comments: ""}))
+        setComments(state => ({ ...state, comments: "" }))
     }
 
     const showCommentError = (e) => {
@@ -96,20 +98,20 @@ export const DetailsComponent = () => {
             setCommentError(false)
         } else {
             setCommentError(true)
-        }       
-    }    
+        }
+    }
 
     return (
         //<button onClick={showAll}>UTUTUTUTUT</button>
         <>
-            <CardComponent styles={createProps(itemData)} allId={{ owner: itemData.Owner, itemId: params.objectId }} />
+            <CardComponent styles={createProps(itemData, isMobile)} allId={{ owner: itemData.Owner, itemId: params.objectId }} />
             <section className="comments">
                 <h3>Comments:</h3>
                 <article >
                     {itemData.comments?.map(x =>
                         <div className='comments__commetWrapper' key={x.commentId}>
                             <h3 className='comments__commetWrapper__username'>{x.username}</h3>
-                            <p className='comments__commetWrapper__message'>{x.comments}</p>                            
+                            <p className='comments__commetWrapper__message'>{x.comments}</p>
                         </div>
                     )}
                     {!itemData.comments?.length > 0 &&
@@ -121,14 +123,16 @@ export const DetailsComponent = () => {
                 </article >
             </section >
 
-            <form id="comments" className='comments-form' onSubmit={addCommetHandler}>
-                <label htmlFor="comments">Post new comment:</label>
-                {showError &&
-                    <p className='showCommentError'>Comment must be at least 10 characters</p>}
-                <textarea className='comments__textarea' name="comments" required onChange={onChange} onBlur={showCommentError}
-                    cols="30" rows="10" value={comments.comments} placeholder="Comment must be at least 10 characters" />
-                <button type="submit" disabled={commentError}>Add comment</button>
-            </form>
+            {auth.username &&
+                <form id="comments" className='comments-form' onSubmit={addCommetHandler}>
+                    <label htmlFor="comments">Post new comment:</label>
+                    {showError &&
+                        <p className='showCommentError'>Comment must be at least 10 characters</p>}
+                    <textarea className='comments__textarea' name="comments" required onChange={onChange} onBlur={showCommentError}
+                        cols="30" rows="10" value={comments.comments} placeholder="Comment must be at least 10 characters" />
+                    <button type="submit" disabled={commentError}>Add comment</button>
+                </form>
+            }
         </>
     )
 } 

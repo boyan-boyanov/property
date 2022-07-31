@@ -91,12 +91,29 @@ export async function getByOwner(id) {
   }
 }
 
-export async function getByQuery(type) {
+export async function getByQuery(searchType) {
+  let type = searchType.toLowerCase()
+  
   // 'Post' is just an arbitrary class, replace it with your custom class
   const query = new Parse.Query('Properties');
-
+  let searchBy = ""
+  if (type === 'rent' || type === 'sale') {
+    searchBy = "RentOrSale"
+  }else if(type === 'house' || type === 'apartment' || type === 'office' ){
+    searchBy = "Type"
+  }else if( type === 'houses' || type === 'apartments' || type === 'offices'){
+    searchBy = "Type"
+    type= type.slice(0, -1);
+  }else {
+    searchBy = "Description"
+  }
+  console.log(searchBy);
   // Finds objects whose title is equal to 'Documentation'
-  query.equalTo('Type', type);
+  if(searchBy === 'Type' || searchBy === 'RentOrSale'){
+    query.equalTo(searchBy, type);
+  }else {
+    query.fullText(searchBy, type);
+  }
 
   const result = []
 

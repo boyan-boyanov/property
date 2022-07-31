@@ -30,19 +30,10 @@ export const CatalogComponent = () => {
         pic = pic.trim()
         return {
             size: "small",
-            cardWidth: "",
-            cardHeight: "",
-            background: "",
             title: x.Description,
-            titleShadow: "",
-            titleColor: "",
             subtitle: x.RentOrSale,
             description: `${x.Type} for ${x.RentOrSale},  price: ${x.Price} $`,
-            descriptionColor: "",
             image: pic,
-            subtitleColor: "",
-            subtitleBackground: "",
-            textRows: ""  //not work for now
         }
     }
 
@@ -50,7 +41,7 @@ export const CatalogComponent = () => {
         <div className={'catalog-container'}>
             <h1>Catalog</h1>
             {allData.length > 0 ?
-                 allData.map(x => <CardComponent key={x.objectId} styles={createProps(x)} allId={{ owner: x.Owner, itemId: x.objectId }} />) 
+                allData.map(x => <CardComponent key={x.objectId} styles={createProps(x)} allId={{ owner: x.Owner, itemId: x.objectId }} />)
                 : <p className='no-articles'>No Articles yet</p>}
         </div>
     )
