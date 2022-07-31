@@ -13,6 +13,7 @@ import { DetailsComponent } from './components/DetailsComponent/DetailsComponent
 import { EditComponent } from './components/EditComponent/EditComponent';
 import { AuthContext } from './contexts/UserContext';
 import { lazy, Suspense, useEffect, useState } from 'react';
+import { SearchComponent } from './components/SearchComponent/SearchComponent';
 const CreatePropertyForm = lazy(() => import('./components/Properties/CreatePropertyForm'))
 
 // import CreatePropertyForm from './components/Properties/CreatePropertyForm';
@@ -48,6 +49,7 @@ function App() {
           <Route path='/catalog/:objectId' element={<DetailsComponent />} />
           <Route path='/catalog/edit/:objectId' element={<EditComponent />} />
           <Route path='/profile' element={<UserProfile/>}/>
+          <Route path='/search/:query' element={<SearchComponent/>} />
           <Route path='*' element={<NotFound />} />
         </Routes>
 

@@ -3,11 +3,13 @@ import Parse from 'parse/dist/parse.min.js';
 
 import "./Carousel.css";
 import { cauroselData } from "../../../services/ItemServices/getServices";
+import { useNavigate } from "react-router-dom";
 
 const Carousel = () => {
-
-  const cardsClick = () => {
-    alert(`You clicked ME !`);
+const navigate = useNavigate()
+  const cardsClick = (e) => {
+    console.log(`You clicked ME ! ${e.target.id}`);
+    navigate(`/catalog/${e.target.id}`)
   };
   const onMouseOver = () => {
     console.log("You passed over");
@@ -141,11 +143,11 @@ const Carousel = () => {
                 onMouseOver={onMouseOver}
                 onMouseLeave={onMouseLeave}
                 key={i}
-                onClick={() => card.clickEvent()}
+                onClick={cardsClick}
               >
                 <div
-                  className="carousel-card-image"
-                  style={{ backgroundImage: `url(${card.image})` }}
+                  className="carousel-card-image" id={card.id}
+                  style={{ backgroundImage: `url(${card.image})` }} onClick={cardsClick}
                 ></div>
                 <p className="carousel-card-title">{card.title}</p>
                 <p className="carousel-card-description">{card.description}</p>
