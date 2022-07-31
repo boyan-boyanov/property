@@ -24,6 +24,7 @@ const Carousel = () => {
   useEffect(() => {
         
     (async () => {
+     
         const query = new Parse.Query('Properties');      
         query.limit(10); // limit to at most 10 results      
         query.skip(0); // skip the first 10 results      
@@ -35,9 +36,10 @@ const Carousel = () => {
           const sentData = []
           for (let item of result){
             const current ={
-              description: item.Description,
-              title: item.RentOrSale,
-              image: item.Images[0]
+              description: item.RentOrSale,
+              title: item.Description,
+              image: item.Images[0],
+              id: item.objectId
             }
             sentData.push(current)
           }

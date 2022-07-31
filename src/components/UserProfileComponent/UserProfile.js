@@ -17,7 +17,7 @@ const UserProfile = () => {
             setOffer(myOffers)
             
         })()
-    }, [])
+    }, [auth.objectId])
 
     function createProps(x) {
         let pic = ''

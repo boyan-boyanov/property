@@ -91,26 +91,3 @@ export async function getByOwner(id) {
   }
 }
 
-export async function cauroselData() {
-  const query = new Parse.Query('Properties');
-  query.limit(10); // limit to at most 10 results      
-  query.skip(0); // skip the first 10 results      
-  try {
-    const results = await query.find();
-    const data = JSON.stringify(results)
-    console.log(JSON.parse(data));
-    const result = JSON.parse(data)
-    const sentData = []
-    for (let item of result) {
-      const current = {
-        description: item.Description,
-        title: item.RentOrSale,
-        image: item.Images[0]
-      }
-      sentData.push(current)
-    }
-    return sentData
-  } catch (error) {
-    console.log(`Error: ${JSON.stringify(error)}`);
-  }
-}
