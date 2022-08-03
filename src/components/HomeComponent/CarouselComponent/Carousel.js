@@ -19,6 +19,7 @@ const navigate = useNavigate()
   };
  
   const maxScrollWidth = useRef(0);
+  //console.log(maxScrollWidth.current);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [cardsArray, setCardsArray] = useState([])
 
@@ -63,6 +64,9 @@ const navigate = useNavigate()
   };
 
   const moveNext = () => {
+    console.log(maxScrollWidth.current);
+    console.log(carousel.current.offsetWidth * currentIndex);
+
     if (
       carousel.current !== null &&
       carousel.current.offsetWidth * currentIndex <= maxScrollWidth.current
@@ -108,7 +112,7 @@ const navigate = useNavigate()
     return () => {
       window.removeEventListener("keydown", keyPressHandler);
     };
-  });
+  },[]);
 
   ////
   useEffect(() => {

@@ -1,3 +1,8 @@
+.user-profile{
+    position: relative;
+}
+
+
 .user-profile-container {
     position: relative;
 }
@@ -158,4 +163,34 @@
         max-width: 83.33333%;
         flex: 0 0 83.33333%;
     }
+}
+
+.user-profile-photoForm{
+    position: absolute;
+    top: 450px;
+    left: 50px;
+}
+
+.user-profile-photoForm__input{
+    background-color: #fff;
+    font-size: 20px;
+    height: 40px;
+    padding-left: 10px;
+    width: 400px;
+}
+
+.user-profile-photoForm__btn{
+    padding: 10px 20px;
+    color: #fff;
+    background-color: #11cdef;
+    font-size: 20px;
+    margin-left: 20px;
+    cursor: pointer;
+}
+
+.user-profile-photoForm__hide{
+    display: none;
+    position: absolute;
+    top: 450px;
+    left: 50px;
 }

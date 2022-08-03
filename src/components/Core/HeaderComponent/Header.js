@@ -1,9 +1,9 @@
 import { CgMenuCheese } from 'react-icons/cg';
 import "./header.css"
-import { useEffect, useState, useContext } from "react";
-import { doUserLogOut, updateUser } from '../services/userServices';
+import {  useState, useContext } from "react";
+import { doUserLogOut } from '../../../services/userServices';
 import { Link } from 'react-router-dom'
-import { AuthContext } from '../contexts/UserContext';
+import { AuthContext } from '../../../contexts/UserContext';
 import { useNavigate } from 'react-router-dom';
 
 
