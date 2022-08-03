@@ -1,10 +1,14 @@
 import React, { useEffect } from 'react';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { createItem, editItem } from '../../services/ItemServices/createService';
 import { getOne } from '../../services/ItemServices/getServices';
 import { loggedIn } from '../../services/userServices';
 import '../AuthComponents/loginForm.css'
 import { useNavigate } from 'react-router-dom';
+import { AuthContext } from "../../contexts/UserContext";
+
+
+
 
 
 export default function CreatePropertyForm(props) {
@@ -13,9 +17,13 @@ export default function CreatePropertyForm(props) {
     const [inputError, setInputError] = useState({})
     const [labelsErrors, setLabelsErrors] = useState({ description: '', price: '', image: '', rentOrSale: '' })
 
+    const { auth } = useContext(AuthContext)
     const navigate = useNavigate()
 
     useEffect(() => {
+        if (!auth.username) {
+            return navigate('/login');
+        }
         if (props.data) {
             const id = props.data.objectId
           //  console.log(id);

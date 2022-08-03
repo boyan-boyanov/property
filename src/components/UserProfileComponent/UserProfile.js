@@ -5,6 +5,8 @@ import { AuthContext } from "../../contexts/UserContext";
 import { getByOwner } from "../../services/ItemServices/getServices";
 import CardComponent from '../CardComponent/CardComponent';
 import { updateUser } from "../../services/userServices";
+import { useNavigate } from 'react-router-dom';
+
 
 
 const UserProfile = () => {
@@ -12,8 +14,14 @@ const UserProfile = () => {
     const { auth, updateAuth } = useContext(AuthContext)
     const [showForm, setShowForm] = useState(false)
 
-    useEffect(() => {
+    const navigate = useNavigate()
 
+    useEffect(() => {
+        
+        if (!auth.username) {
+            return navigate('/login');
+        }
+       
         (async () => {
             const myOffers = await getByOwner(auth.objectId)
             setOffer(myOffers)

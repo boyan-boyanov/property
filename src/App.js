@@ -14,7 +14,7 @@ import { EditComponent } from './components/EditComponent/EditComponent';
 import { AuthContext } from './contexts/UserContext';
 import { lazy, Suspense, useEffect, useState } from 'react';
 import { SearchComponent } from './components/SearchComponent/SearchComponent';
-const CreatePropertyForm = lazy(() => import('./components/Properties/CreatePropertyForm'))
+const CreatePropertyForm = lazy(() => import('./components/CreateComponent/CreatePropertyForm'))
 
 // import CreatePropertyForm from './components/Properties/CreatePropertyForm';
 function App() {

@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
+//import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import CreatePropertyForm from '../Properties/CreatePropertyForm'
-import { getOne } from '../../services/ItemServices/getServices';
+import CreatePropertyForm from '../CreateComponent/CreatePropertyForm'
+//import { getOne } from '../../services/ItemServices/getServices';
 
 
 export const EditComponent = () => {
