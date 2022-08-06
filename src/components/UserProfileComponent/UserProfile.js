@@ -86,7 +86,7 @@ const UserProfile = () => {
             <div className={'catalog-container'}>
                 <h1>My Offers</h1>
                 {offer.length > 0 ?
-                    offer.map(x => <CardComponent key={x.objectId} styles={createProps(x)} allId={{ owner: x.Owner, itemId: x.objectId }} />)
+                    offer.map(x => <CardComponent key={x.objectId} styles={createProps(x)} favorites={x.favorites} allId={{ owner: x.Owner, itemId: x.objectId }} />)
                     : <p className='no-articles'>No Articles yet</p>}
             </div>
             {showForm &&
