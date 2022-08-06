@@ -9,3 +9,18 @@
     flex-basis: 100%;
     text-align: center;
 }
+
+.paginator {
+    flex-basis: 100%;
+    text-align: center;
+    
+}
+
+.paginator__text{
+    font-size: 20px;
+    padding: 0 10px;
+}
+
+.paginator__btn {
+    font-size: 20px;
+}
