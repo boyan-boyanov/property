@@ -17,13 +17,9 @@ export const SearchComponent = () => {
             setAllData(data)
         }
         waitData()
-    }, []);
+    }, [query]);
 
-    function showAll() {
-        //const data = (await allData).results;
-        console.log(allData);
-    }
-
+   
 
     function createProps(x) {
         let pic = ''

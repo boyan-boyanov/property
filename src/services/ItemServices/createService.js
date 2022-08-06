@@ -59,10 +59,10 @@ export async function editItem(data, id) {
     newHome.set('Description', data.description);
     newHome.set('Price', data.price);
     newHome.set('RentOrSale', data.rentOrSale);
-    if(data.image){
+    if (data.image) {
       newHome.set('Images', [data.image]);
     }
-    if(data.comments){
+    if (data.comments) {
       newHome.set('comments', data.comments);
     }
 
@@ -78,7 +78,7 @@ export async function editItem(data, id) {
       //   console.log(response.get('RentOrSale'));
       //   console.log(response.get('Images'));
       //   console.log(response.get('comments'));
-
+      return response
       //  console.log('Properties updated', response);
     } catch (error) {
       console.error('Error while updating Properties', error);
@@ -90,7 +90,7 @@ export async function editItem(data, id) {
 
 export async function deleteItem(id) {
   console.log(id);
-  await fetch(`${PARSE_HOST_URL}classes/Properties/${id}`,  {
+  await fetch(`${PARSE_HOST_URL}classes/Properties/${id}`, {
     method: 'DELETE',
     headers: {
       'X-Parse-Application-Id': '62MiP8VdJxtvy35FJ52VYDC5LDKk5asRiGMoiLPd',

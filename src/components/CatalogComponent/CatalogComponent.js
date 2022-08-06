@@ -15,10 +15,7 @@ export const CatalogComponent = () => {
         waitData()
     }, []);
 
-    function showAll() {
-        //const data = (await allData).results;
-        console.log(allData);
-    }
+    
 
 
     function createProps(x) {

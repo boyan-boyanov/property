@@ -1,14 +1,8 @@
-import React, { useEffect } from 'react';
-import { useState, useContext } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { createItem, editItem } from '../../services/ItemServices/createService';
 import { getOne } from '../../services/ItemServices/getServices';
-import { loggedIn } from '../../services/userServices';
-import '../AuthComponents/loginForm.css'
-import { useNavigate } from 'react-router-dom';
-import { AuthContext } from "../../contexts/UserContext";
-
-
-
+import '../AuthComponents/loginForm.css';
 
 
 export default function CreatePropertyForm(props) {
@@ -17,16 +11,14 @@ export default function CreatePropertyForm(props) {
     const [inputError, setInputError] = useState({})
     const [labelsErrors, setLabelsErrors] = useState({ description: '', price: '', image: '', rentOrSale: '' })
 
-    const { auth } = useContext(AuthContext)
+
     const navigate = useNavigate()
 
     useEffect(() => {
-        if (!auth.username) {
-            return navigate('/login');
-        }
+
         if (props.data) {
             const id = props.data.objectId
-          //  console.log(id);
+            //  console.log(id);
             async function waitData() {
                 const data = await getOne(id)
                 const currentItem = {
@@ -41,8 +33,8 @@ export default function CreatePropertyForm(props) {
                     description: true, price: true, image: true, rentOrSale: true
                 }
                 setLabelsErrors(state => ({ ...labelsErrors, ...trueLabelErrors }))
-               // console.log(data);
-               // console.log(details);
+                // console.log(data);
+                // console.log(details);
             }
             waitData()
         }
@@ -55,34 +47,34 @@ export default function CreatePropertyForm(props) {
 
 
     function labelError(name, value) {
-        if (name == "price") {
+        if (name === "price") {
             setLabelsErrors(state => ({ ...state, price: !isNaN(Number(value)) }))
-            if (value == '') {
+            if (value === '') {
                 setLabelsErrors(state => ({ ...state, price: false }))
             }
         }
-        if (name == "image") {
+        if (name === "image") {
             setLabelsErrors(state => ({ ...state, image: IMAGE_PATTERN.test(value) }))
         }
-        if (name == "description") {
+        if (name === "description") {
             setLabelsErrors(state => ({ ...state, description: !(value.length < 10) }))
         }
-        if (name == "rentOrSale") {
+        if (name === "rentOrSale") {
             setLabelsErrors(state => ({ ...state, rentOrSale: true }))
         }
     }
 
     const inputValidate = (e) => {
-        if (e.target.name == "description") {
+        if (e.target.name === "description") {
             setInputError(state => ({ ...state, description: details.description.length < 10 }))
         };
-        if (e.target.name == "price") {
+        if (e.target.name === "price") {
             setInputError(state => ({ ...state, price: isNaN(Number(details.price)) }))
-            if (details.price == '') {
+            if (details.price === '') {
                 setInputError(state => ({ ...state, price: true }))
             }
         };
-        if (e.target.name == "image") {
+        if (e.target.name === "image") {
             console.log(details.image);
             setInputError(state => ({ ...state, image: !IMAGE_PATTERN.test(details.image) }))
         };
@@ -144,13 +136,13 @@ export default function CreatePropertyForm(props) {
                     }
 
                     <div className='form-group'>
-                        <label htmlFor="rent" className={'basicForm__label-error label-radio' + ` ${details.rentOrSale == 'rent' ? 'selected' : ''}`}>Rent:</label>
-                        <input type="radio" checked={details.rentOrSale == 'rent'}  className='btn-radio' name="rentOrSale" value='rent' id="rent" onChange={createHandler} />
-                        <label htmlFor="sale" className={'basicForm__label-error label-radio' + ` ${details.rentOrSale == 'sale' ? 'selected' : ''}`}>Sale:</label>
-                        <input type="radio" checked={details.rentOrSale == 'sale'} className='btn-radio' name="rentOrSale" value='sale' id="sale" onChange={createHandler} />
+                        <label htmlFor="rent" className={`basicForm__label-error label-radio ${details.rentOrSale === 'rent' ? 'selected' : ''}`}>Rent:</label>
+                        <input type="radio" checked={details.rentOrSale === 'rent'} className='btn-radio' name="rentOrSale" value='rent' id="rent" onChange={createHandler} />
+                        <label htmlFor="sale" className={`basicForm__label-error label-radio ${details.rentOrSale === 'sale' ? 'selected' : ''}`}>Sale:</label>
+                        <input type="radio" checked={details.rentOrSale === 'sale'} className='btn-radio' name="rentOrSale" value='sale' id="sale" onChange={createHandler} />
                     </div>
 
-                    <input disabled={!Object.values(labelsErrors).every(item => (item !== "" && item == true))} type='submit' value={props.data ? "EDIT" : "CREATE"} onClick={submitHandler}></input>
+                    <input disabled={!Object.values(labelsErrors).every(item => (item !== "" && item === true))} type='submit' value={props.data ? "EDIT" : "CREATE"} onClick={submitHandler}></input>
                 </div>
             </form>
         </div>

@@ -8,11 +8,9 @@ import { useNavigate } from 'react-router-dom';
 
 
 const Header = () => {
-  const [isNavExpanded, setIsNavExpanded] = useState(false)
-  const [isLoged, setIsLoged] = useState()
+  const [isNavExpanded, setIsNavExpanded] = useState(false)  
   const { auth } = useContext(AuthContext)
-  const {userLogin} = useContext(AuthContext)
-  const value = useContext(AuthContext)
+  const {userLogin} = useContext(AuthContext)  
 //console.log(auth.username);
  
   const navigate = useNavigate()

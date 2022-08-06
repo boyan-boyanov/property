@@ -5,8 +5,6 @@ import { AuthContext } from "../../contexts/UserContext";
 import { getByOwner } from "../../services/ItemServices/getServices";
 import CardComponent from '../CardComponent/CardComponent';
 import { updateUser } from "../../services/userServices";
-import { useNavigate } from 'react-router-dom';
-
 
 
 const UserProfile = () => {
@@ -14,13 +12,9 @@ const UserProfile = () => {
     const { auth, updateAuth } = useContext(AuthContext)
     const [showForm, setShowForm] = useState(false)
 
-    const navigate = useNavigate()
+   
 
-    useEffect(() => {
-        
-        if (!auth.username) {
-            return navigate('/login');
-        }
+    useEffect(() => {              
        
         (async () => {
             const myOffers = await getByOwner(auth.objectId)
@@ -77,7 +71,7 @@ const UserProfile = () => {
                 <div className="user-profile-card">
                     <div className="card-profile-card__imgContainer">
                         <div className="card-profile-card__divimg">
-                            <img className="card-profile-card__img" src={auth.userImg}></img>
+                            <img className="card-profile-card__img" src={auth.userImg} alt=""></img>
                         </div>
                     </div>
                     <div className="card-profile-card__info">
