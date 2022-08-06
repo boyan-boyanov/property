@@ -15,6 +15,7 @@ import { AuthContext } from './contexts/UserContext';
 import { lazy, Suspense, useEffect, useState } from 'react';
 import { SearchComponent } from './components/SearchComponent/SearchComponent';
 import PrivateRoute from './components/Guards/PrivateRoute';
+import LoginRoute from './components/Guards/LoginRouts';
 const CreatePropertyForm = lazy(() => import('./components/CreateComponent/CreatePropertyForm'))
 
 // import CreatePropertyForm from './components/Properties/CreatePropertyForm';
@@ -47,9 +48,12 @@ function App() {
           <Route path='/catalog' element={<CatalogComponent />} />
           <Route path='/catalog/:objectId' element={<DetailsComponent />} />
 
-          <Route path='/login' element={<LoginForm />} />
-          <Route path='/register' element={<RegisterForm />} />
           <Route path='/catalog/edit/:objectId' element={<EditComponent />} />
+
+          <Route element={<LoginRoute />}>
+            <Route path='/login' element={<LoginForm />} />
+            <Route path='/register' element={<RegisterForm />} />
+          </Route>
 
           <Route element={<PrivateRoute />}>
             <Route path='/profile' element={<UserProfile />} />
