@@ -4,9 +4,10 @@ import { Link } from "react-router-dom";
 import { deleteItem } from "../../services/ItemServices/createService";
 import { useNavigate } from "react-router-dom";
 
+
 const CardComponent = (props) => {
     const [isOwner, setIsOwner] = useState(false)
-
+    const [isOnFavorite, setIsOnFavorite] = useState(false)
     const navigate = useNavigate()
     //const params = useParams()
     // console.log(props);
@@ -24,7 +25,7 @@ const CardComponent = (props) => {
         e.preventDefault()
         deleteItem(props.allId.itemId)
         navigate('/')
-       // console.log(props.allId.itemId);
+        // console.log(props.allId.itemId);
     }
 
     let size = props.styles.size || "small"
@@ -50,6 +51,11 @@ const CardComponent = (props) => {
         backgroundColor: props.styles.background
     }
 
+    const favoriteItem =(id) => {
+        setIsOnFavorite(state => !state)
+        console.log(id);
+    }
+
     return (
         <div className={"CardComponent__container" + props.styles.size}>
             <article style={cardStyles} className={"CardComponent__article " + props.styles.size}>
@@ -58,7 +64,10 @@ const CardComponent = (props) => {
                     {images.map((image) =>
                         <img style={imgCheck(key, imgCount, size)} className={"CardComponent__img " + props.styles.size} src={image} key={key++} alt="pic_name" />
                     )}
-
+                    <div className="fontAwesom-container" onClick={() => favoriteItem(props.allId.itemId)}>
+                        {isOnFavorite ? (<i class="fa-solid fa-star fa-spin" ></i>)
+                            : (<i class="fa-regular fa-star fa-beat"></i>)}
+                    </div>
                 </section>
                 <section className={"CardComponent__bottom " + props.styles.size}>
                     <h5 style={subtitleColor} className={"CardComponent__subtitle " + props.styles.size}>{props.styles.subtitle}</h5>

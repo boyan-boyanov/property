@@ -308,3 +308,19 @@
 .cardComponentBtn:hover {
     background-position: 100% 0%;
 }
+
+
+.fa-star{
+    font-size: 25px;
+    color: #FFCE00;
+}
+
+.fontAwesom-container{
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
+.CardComponent__top {
+    position: relative;
+}
