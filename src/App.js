@@ -14,6 +14,7 @@ import { EditComponent } from './components/EditComponent/EditComponent';
 import { AuthContext } from './contexts/UserContext';
 import { lazy, Suspense, useEffect, useState } from 'react';
 import { SearchComponent } from './components/SearchComponent/SearchComponent';
+import PrivateRoute from './components/Guards/PrivateRoute';
 const CreatePropertyForm = lazy(() => import('./components/CreateComponent/CreatePropertyForm'))
 
 // import CreatePropertyForm from './components/Properties/CreatePropertyForm';
@@ -26,14 +27,14 @@ function App() {
   }
 
   const updateAuth = (data) => {
-    setAuth(state => ({...state, ...data}))
+    setAuth(state => ({ ...state, ...data }))
   }
   useEffect(() => {
     const isLogged = localStorage.getItem('userData')
     if (isLogged) {
       setAuth(JSON.parse(localStorage.getItem('userData')))
     }
-  },[])
+  }, [])
 
   return (
     <>
@@ -41,19 +42,23 @@ function App() {
         <Header />
 
         <Routes>
-          <Route path='/login' element={<LoginForm />} />
-          <Route path='/register' element={<RegisterForm />} />
-          <Route path='/create' element={
-            <Suspense fallback={<span>Loading...</span>}>
-              <CreatePropertyForm />
-            </Suspense>
-          } />
+          <Route path='/search/:query' element={<SearchComponent />} />
           <Route path='/' element={<HomeComponent />} />
           <Route path='/catalog' element={<CatalogComponent />} />
           <Route path='/catalog/:objectId' element={<DetailsComponent />} />
+
+          <Route path='/login' element={<LoginForm />} />
+          <Route path='/register' element={<RegisterForm />} />
           <Route path='/catalog/edit/:objectId' element={<EditComponent />} />
-          <Route path='/profile' element={<UserProfile/>}/>
-          <Route path='/search/:query' element={<SearchComponent/>} />
+
+          <Route element={<PrivateRoute />}>
+            <Route path='/profile' element={<UserProfile />} />
+            <Route path='/create' element={
+              <Suspense fallback={<span>Loading...</span>}>
+                <CreatePropertyForm />
+              </Suspense>
+            } />
+          </Route>
           <Route path='*' element={<NotFound />} />
         </Routes>
 
