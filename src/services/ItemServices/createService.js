@@ -1,6 +1,7 @@
 import Parse from 'parse/dist/parse.min.js';
 import { getUserData, updateUser } from '../userServices';
 
+
 const PARSE_APPLICATION_ID = '62MiP8VdJxtvy35FJ52VYDC5LDKk5asRiGMoiLPd';
 const PARSE_HOST_URL = 'https://parseapi.back4app.com/';
 const PARSE_JAVASCRIPT_KEY = 'V5XM1OCDkmjasMI30CAnMnpsgkIBHMvzTNfoCBO4';
@@ -37,7 +38,7 @@ export async function createItem(data) {
     updateUser(dataForUpdate)
 
     // Access the Parse Object attributes using the .GET method
-    console.log('Properties created', result);
+    return result;
   } catch (error) {
     console.error('Error while creating Properties: ', error);
   }
@@ -99,7 +100,7 @@ export async function deleteItem(id) {
 
 export async function addOrRemoveFavorites(propertyId, bodyData) {
   try {
-console.log(propertyId, bodyData);
+    console.log(propertyId, bodyData);
     const config = {
       method: 'PUT',
       headers: {

@@ -6,20 +6,7 @@ import HomeHeader from './HomeHeader';
 
 const HomeComponent = () => {
     const navigate = useNavigate()     
-
-    // async function createPhoto(e) {
-    //     e.preventDefault()
-    //     const formData = new FormData(e.target)
-    //     const pic = formData.get('filename')
-    //     console.log(pic);
-    //     let myFile = pic.toString('base64')
-
-    //     let myPhoto = new Parse.File('myfile.png', { base64: myFile })
-    //     let Photo = Parse.Object.extend('photos');
-    //     let photo = new Photo();
-    //     photo.set('photo', myPhoto);
-    //     photo.save();
-    // }
+   
     const searchType = (event, type) => {
         console.log(event);
         console.log(type);
@@ -28,7 +15,7 @@ const HomeComponent = () => {
     return (
         <>
             <HomeHeader />
-            {/* <CardComponent styles={styles} /> */}
+            
             <Carousel />
 
             <section className={style['home-center']}>

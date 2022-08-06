@@ -22,7 +22,7 @@ const CreatePropertyForm = lazy(() => import('./components/CreateComponent/Creat
 function App() {
   //const [loggedUser, setLoggedUser] = useState()
   const [auth, setAuth] = useState({})
-
+  
   const userLogin = (authData) => {
     setAuth(authData)
   }
@@ -39,7 +39,7 @@ function App() {
 
   return (
     <>
-      <AuthContext.Provider value={{ auth, userLogin, updateAuth }}>
+      <AuthContext.Provider value={{ auth, userLogin, updateAuth, setAuth }}>
         <Header />
 
         <Routes>

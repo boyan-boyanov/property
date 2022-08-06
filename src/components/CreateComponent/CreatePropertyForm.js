@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { createItem, editItem } from '../../services/ItemServices/createService';
 import { getOne } from '../../services/ItemServices/getServices';
 import '../AuthComponents/loginForm.css';
+import { AuthContext } from '../../contexts/UserContext';
 
 
 export default function CreatePropertyForm(props) {
@@ -10,7 +11,7 @@ export default function CreatePropertyForm(props) {
     const [details, setDetails] = useState({ type: 'house', description: '', price: '', image: '', rentOrSale: '' })
     const [inputError, setInputError] = useState({})
     const [labelsErrors, setLabelsErrors] = useState({ description: '', price: '', image: '', rentOrSale: '' })
-
+    const { auth, setAuth } = useContext(AuthContext)
 
     const navigate = useNavigate()
 
@@ -82,11 +83,26 @@ export default function CreatePropertyForm(props) {
 
     function submitHandler(e) {
         e.preventDefault();
+        console.log(auth);
+
         if (props.data) {
             editItem(details, props.data.objectId)
         } else {
-            createItem(details)
+            createItem(details).then((value) => {
+                const addNewOffer = auth.myOffer
+                console.log(addNewOffer);
+                const test = [...addNewOffer, value.id]
+                console.log(value.id);
+                console.log(test);
+
+                setAuth(state => ({
+                    ...state, myOffer: test
+                }))
+                //updateAuth({ myOffer: addNewOffer })
+
+            })
         }
+
         navigate('/')
     }
 
