@@ -83,23 +83,21 @@ export default function CreatePropertyForm(props) {
 
     function submitHandler(e) {
         e.preventDefault();
-        console.log(auth);
 
         if (props.data) {
             editItem(details, props.data.objectId)
         } else {
             createItem(details).then((value) => {
                 const addNewOffer = auth.myOffer
-                console.log(addNewOffer);
-                const test = [...addNewOffer, value.id]
-                console.log(value.id);
-                console.log(test);
 
+                const test = [...addNewOffer, value.id]
+
+                const data = JSON.parse(localStorage.getItem('userData'))
+                data.myOffer.push(value.id)
+                localStorage.setItem("userData", JSON.stringify(data))
                 setAuth(state => ({
                     ...state, myOffer: test
                 }))
-                //updateAuth({ myOffer: addNewOffer })
-
             })
         }
 
