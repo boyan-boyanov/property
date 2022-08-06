@@ -2,11 +2,15 @@ import React, { useEffect, useState } from 'react';
 import { getAll } from '../../services/ItemServices/getServices';
 import CardComponent from '../CardComponent/CardComponent';
 import './catalogComponent.css'
+import { Rings } from 'react-loader-spinner'
+
 
 export const CatalogComponent = () => {
     const [allData, setAllData] = useState([]);
     const [showData, setShowData] = useState([]);
     const [page, setPage] = useState({})
+    const [loader, setLoader] = useState(true)
+
     const numberOfViewItems = 5
 
     useEffect(() => {
@@ -18,7 +22,8 @@ export const CatalogComponent = () => {
             setShowData(show)
             const numberOfPages = Math.ceil(data.results.length / numberOfViewItems)
             setPage({ numberOfPages, currentPage: 1 })
-            console.log(Math.ceil(data.results.length / numberOfViewItems));
+            //console.log(Math.ceil(data.results.length / numberOfViewItems));
+            setLoader(false)
 
         }
         waitData()
@@ -76,18 +81,30 @@ export const CatalogComponent = () => {
     }
 
     return (
-        <div className={'catalog-container'}>
-            <h1>Catalog</h1>
-            <span className='paginator'>
-                <button className='paginator__btn' onClick={previewPage}>&#8810; previews</button>
-                <span className='paginator__text'>{page.currentPage} / {page.numberOfPages}</span>
-                <button className='paginator__btn' onClick={nextPage}>next &#8811;</button>
+        <>
+            {loader ? (
+                <div className='loader'>
+                    <Rings width='100' height='100' color='red' ariaLabel='loading' />
+                    <Rings width='100' height='100' color='red' ariaLabel='loading' />
+                    <Rings width='100' height='100' color='red' ariaLabel='loading' />
+                </div>
+            ) : (
+                <div className={'catalog-container'}>
+                    <h1>Catalog</h1>
+                    <span className='paginator'>
+                        <button className='paginator__btn' onClick={previewPage}>&#8810; previews</button>
+                        <span className='paginator__text'>{page.currentPage} / {page.numberOfPages}</span>
+                        <button className='paginator__btn' onClick={nextPage}>next &#8811;</button>
 
-            </span>
-            {allData.length > 0 ?
-                showData.map(x => <CardComponent key={x.objectId} styles={createProps(x)} allId={{ owner: x.Owner, itemId: x.objectId }} />)
-                : <p className='no-articles'>No Articles yet</p>}
-        </div>
+                    </span>
+                    {allData.length > 0 ?
+                        showData.map(x => <CardComponent key={x.objectId} styles={createProps(x)} allId={{ owner: x.Owner, itemId: x.objectId }} />)
+                        : <p className='no-articles'>No Articles yet</p>}
+                </div>
+            )}
+
+        </>
+
     )
 }
 

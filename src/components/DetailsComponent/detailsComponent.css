@@ -85,3 +85,10 @@ form textarea:focus{
 .comments__commetWrapper__message{
     padding: 5px 15px;
 }
+
+.loader{
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+    margin-bottom: 200px;
+}

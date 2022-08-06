@@ -1,12 +1,12 @@
 import CardComponent from '../CardComponent/CardComponent';
 import React, { useEffect, useState, useContext } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams, Navigate } from 'react-router-dom';
 import { getOne } from '../../services/ItemServices/getServices';
 import './detailsComponent.css'
 import { editItem } from '../../services/ItemServices/createService';
 import { v4 } from 'uuid'
 import { AuthContext } from '../../contexts/UserContext';
-
+import {  Rings } from 'react-loader-spinner'
 
 export const DetailsComponent = () => {
     const params = useParams()
@@ -15,8 +15,12 @@ export const DetailsComponent = () => {
     const [commentError, setCommentError] = useState(true)
     const [showError, setShowError] = useState(false)
     const [isMobile, setIsMobile] = useState(window.innerWidth < 850)
+    const [existItem, setExistItem] = useState(true)
+    const [loader, setLoader] = useState(true)
 
     const { auth } = useContext(AuthContext)
+    const navigate = useNavigate()
+
 
     useEffect(() => {
         window.addEventListener("resize", () => {
@@ -31,13 +35,25 @@ export const DetailsComponent = () => {
         async function waitData() {
             const data = await getOne(params.objectId)
             console.log(data);
+            if (!data.Owner) {
+                navigate('/404')
+                setExistItem(false)
+            } else {
+                setLoader(false)
+            }
             setItemData(data)
         }
         waitData()
+    }, [params.objectId, existItem]);
 
-    }, [params.objectId]);
+    // useEffect(() => {
+    //     if (!existItem) {
+    //         navigate('/catalog')
+    //     }
+    //     console.log(existItem);
+    // }, [existItem])
 
-  
+
 
     function createProps(x) {
         let pic = ''
@@ -104,35 +120,47 @@ export const DetailsComponent = () => {
     return (
         //<button onClick={showAll}>UTUTUTUTUT</button>
         <>
-            <CardComponent styles={createProps(itemData, isMobile)} allId={{ owner: itemData.Owner, itemId: params.objectId }} />
-            <section className="comments">
-                <h3>Comments:</h3>
-                <article >
-                    {itemData.comments?.map(x =>
-                        <div className='comments__commetWrapper' key={x.commentId}>
-                            <h3 className='comments__commetWrapper__username'>{x.username}</h3>
-                            <p className='comments__commetWrapper__message'>{x.comments}</p>
-                        </div>
-                    )}
-                    {!itemData.comments?.length > 0 &&
-                        <div className='noCommets'>
-                            <p className='noComments__p'>No commets for this property</p>
-                            <p className='noComments__p'>Add first comment.</p>
-                        </div>
-                    }
-                </article >
-            </section >
+            {loader ? (
+                <div className='loader'>
+                    <Rings width='100' height='100' color='red' ariaLabel='loading' />
+                    <Rings width='100' height='100' color='red' ariaLabel='loading' />
+                    <Rings width='100' height='100' color='red' ariaLabel='loading' />
+                </div>
+            ) : (
+                <>
 
-            {auth.username &&
-                <form id="comments" className='comments-form' onSubmit={addCommetHandler}>
-                    <label htmlFor="comments">Post new comment:</label>
-                    {showError &&
-                        <p className='showCommentError'>Comment must be at least 10 characters</p>}
-                    <textarea className='comments__textarea' name="comments" required onChange={onChange} onBlur={showCommentError}
-                        cols="30" rows="10" value={comments.comments} placeholder="Comment must be at least 10 characters" />
-                    <button type="submit" disabled={commentError}>Add comment</button>
-                </form>
-            }
+                    <CardComponent styles={createProps(itemData, isMobile)} allId={{ owner: itemData.Owner, itemId: params.objectId }} />
+
+                    <section className="comments">
+                        <h3>Comments:</h3>
+                        <article >
+                            {itemData.comments?.map(x =>
+                                <div className='comments__commetWrapper' key={x.commentId}>
+                                    <h3 className='comments__commetWrapper__username'>{x.username}</h3>
+                                    <p className='comments__commetWrapper__message'>{x.comments}</p>
+                                </div>
+                            )}
+                            {!itemData.comments?.length > 0 &&
+                                <div className='noCommets'>
+                                    <p className='noComments__p'>No commets for this property</p>
+                                    <p className='noComments__p'>Add first comment.</p>
+                                </div>
+                            }
+                        </article >
+                    </section >
+                    {auth.username &&
+                        <form id="comments" className='comments-form' onSubmit={addCommetHandler}>
+                            <label htmlFor="comments">Post new comment:</label>
+                            {showError &&
+                                <p className='showCommentError'>Comment must be at least 10 characters</p>}
+                            <textarea className='comments__textarea' name="comments" required onChange={onChange} onBlur={showCommentError}
+                                cols="30" rows="10" value={comments.comments} placeholder="Comment must be at least 10 characters" />
+                            <button type="submit" disabled={commentError}>Add comment</button>
+                        </form>
+                    }
+                </>
+            )}
+
         </>
     )
 } 
