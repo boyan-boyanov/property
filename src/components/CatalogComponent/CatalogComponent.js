@@ -16,7 +16,6 @@ export const CatalogComponent = () => {
     useEffect(() => {
         async function waitData() {
             const data = await getAll()
-            // console.log(data);
             setAllData(data.results)
             const show = data.results.slice(0, numberOfViewItems)
             setShowData(show)
@@ -98,7 +97,7 @@ export const CatalogComponent = () => {
 
                     </span>
                     {allData.length > 0 ?
-                        showData.map(x => <CardComponent key={x.objectId} styles={createProps(x)} allId={{ owner: x.Owner, itemId: x.objectId }} />)
+                        showData.map(x => <CardComponent key={x.objectId} styles={createProps(x)} favorites={x.favorites} allId={{ owner: x.Owner, itemId: x.objectId }} />)
                         : <p className='no-articles'>No Articles yet</p>}
                 </div>
             )}

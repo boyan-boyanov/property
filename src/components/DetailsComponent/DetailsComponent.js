@@ -129,7 +129,7 @@ export const DetailsComponent = () => {
             ) : (
                 <>
 
-                    <CardComponent styles={createProps(itemData, isMobile)} allId={{ owner: itemData.Owner, itemId: params.objectId }} />
+                    <CardComponent styles={createProps(itemData, isMobile)} favorites={itemData.favorites} allId={{ owner: itemData.Owner, itemId: params.objectId }} />
 
                     <section className="comments">
                         <h3>Comments:</h3>

@@ -52,8 +52,9 @@ export async function getOne(id) {
       const RentOrSale = object.get('RentOrSale')
       const Images = object.get('Images')
       const comments = object.get('comments')
+      const favorites = object.get('favorites')
 
-      result = { Owner, Type, Description, Price, RentOrSale, Images, comments }
+      result = { Owner, Type, Description, Price, RentOrSale, Images, comments, favorites }
       // console.log(Owner);
       // console.log(Type);
       // console.log(Description);

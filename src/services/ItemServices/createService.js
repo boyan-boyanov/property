@@ -44,8 +44,6 @@ export async function createItem(data) {
 }
 
 
-
-
 export async function editItem(data, id) {
   // console.log(data);
   // console.log(id);
@@ -97,4 +95,25 @@ export async function deleteItem(id) {
       'X-Parse-REST-API-Key': '53WdfHoxCS9NGG50G6C2IWCHsUBjOfCt2LnDVasQ'
     }
   });
+}
+
+export async function addOrRemoveFavorites(propertyId, bodyData) {
+  try {
+console.log(propertyId, bodyData);
+    const config = {
+      method: 'PUT',
+      headers: {
+        'X-Parse-Application-Id': '62MiP8VdJxtvy35FJ52VYDC5LDKk5asRiGMoiLPd',
+        'X-Parse-REST-API-Key': '53WdfHoxCS9NGG50G6C2IWCHsUBjOfCt2LnDVasQ',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(bodyData)
+
+    }
+    let response = await fetch(`${PARSE_HOST_URL}/classes/Properties/${propertyId}`, config);
+    return await response.json();
+
+  } catch (error) {
+    console.error('Error while retrieving user', error);
+  }
 }

@@ -1,17 +1,26 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import "./CardComponent.css"
 import { Link } from "react-router-dom";
-import { deleteItem } from "../../services/ItemServices/createService";
+import { addOrRemoveFavorites, deleteItem } from "../../services/ItemServices/createService";
 import { useNavigate } from "react-router-dom";
-
+import { getOne } from "../../services/ItemServices/getServices";
+import { AuthContext } from "../../contexts/UserContext";
 
 const CardComponent = (props) => {
     const [isOwner, setIsOwner] = useState(false)
     const [isOnFavorite, setIsOnFavorite] = useState(false)
     const navigate = useNavigate()
+
+    const { auth } = useContext(AuthContext)
     //const params = useParams()
     // console.log(props);
     useEffect(() => {
+        console.log(props);
+        if(props.favorites.includes(auth.objectId)){
+            setIsOnFavorite(true)
+        }else{
+            setIsOnFavorite(false)
+        }
         if (localStorage.getItem('userData') != null) {
             const owner = JSON.parse(localStorage.getItem('userData')).objectId
             if (owner === props.allId.owner) {
@@ -51,9 +60,26 @@ const CardComponent = (props) => {
         backgroundColor: props.styles.background
     }
 
-    const favoriteItem =(id) => {
+    const favoriteItem = (id) => {
+        const currentUserId = auth.objectId
         setIsOnFavorite(state => !state)
-        console.log(id);
+        getOne(id).then((value) => {
+            console.log(value);
+            const favoritesArray = value.favorites
+           
+            if (favoritesArray.includes(currentUserId)) {
+                console.log('yes');
+                const index = favoritesArray.indexOf(currentUserId)
+                favoritesArray.splice(index)
+                console.log(favoritesArray);
+                addOrRemoveFavorites(id, { favorites: favoritesArray })
+            } else {
+                favoritesArray.push(currentUserId)
+                console.log(favoritesArray);
+                addOrRemoveFavorites(id, { favorites: favoritesArray })
+            }
+        })
+
     }
 
     return (
@@ -65,8 +91,8 @@ const CardComponent = (props) => {
                         <img style={imgCheck(key, imgCount, size)} className={"CardComponent__img " + props.styles.size} src={image} key={key++} alt="pic_name" />
                     )}
                     <div className="fontAwesom-container" onClick={() => favoriteItem(props.allId.itemId)}>
-                        {isOnFavorite ? (<i class="fa-solid fa-star fa-spin" ></i>)
-                            : (<i class="fa-regular fa-star fa-beat"></i>)}
+                        {isOnFavorite ? (<i className="fa-solid fa-star fa-spin" ></i>)
+                            : (<i className="fa-regular fa-star fa-beat"></i>)}
                     </div>
                 </section>
                 <section className={"CardComponent__bottom " + props.styles.size}>
