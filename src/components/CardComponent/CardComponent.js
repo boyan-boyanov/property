@@ -16,9 +16,9 @@ const CardComponent = (props) => {
     // console.log(props);
     useEffect(() => {
         console.log(props);
-        if(props.favorites.includes(auth.objectId)){
+        if (props.favorites.includes(auth.objectId)) {
             setIsOnFavorite(true)
-        }else{
+        } else {
             setIsOnFavorite(false)
         }
         if (localStorage.getItem('userData') != null) {
@@ -66,7 +66,7 @@ const CardComponent = (props) => {
         getOne(id).then((value) => {
             console.log(value);
             const favoritesArray = value.favorites
-           
+
             if (favoritesArray.includes(currentUserId)) {
                 console.log('yes');
                 const index = favoritesArray.indexOf(currentUserId)
@@ -90,10 +90,16 @@ const CardComponent = (props) => {
                     {images.map((image) =>
                         <img style={imgCheck(key, imgCount, size)} className={"CardComponent__img " + props.styles.size} src={image} key={key++} alt="pic_name" />
                     )}
-                    <div className="fontAwesom-container" onClick={() => favoriteItem(props.allId.itemId)}>
-                        {isOnFavorite ? (<i className="fa-solid fa-star fa-spin" ></i>)
-                            : (<i className="fa-regular fa-star fa-beat"></i>)}
-                    </div>
+                    {auth.username &&
+                        <div>
+                            {!isOwner &&
+                                <div className="fontAwesom-container" onClick={() => favoriteItem(props.allId.itemId)}>
+                                    {isOnFavorite ? (<i className="fa-solid fa-star fa-spin" ></i>)
+                                        : (<i className="fa-regular fa-star fa-beat"></i>)}
+                                </div>
+                            }
+                        </div>
+                    }
                 </section>
                 <section className={"CardComponent__bottom " + props.styles.size}>
                     <h5 style={subtitleColor} className={"CardComponent__subtitle " + props.styles.size}>{props.styles.subtitle}</h5>
