@@ -41,7 +41,7 @@ export const SearchComponent = () => {
         <div className={'catalog-container'}>
             <h1>Result of your serach: {query}</h1>
             {allData.length > 0 ?
-                allData.map(x => <CardComponent key={x.objectId} styles={createProps(x)} allId={{ owner: x.Owner, itemId: x.objectId }} />)
+                allData.map(x => <CardComponent key={x.objectId} styles={createProps(x)} favorites={x.favorites} allId={{ owner: x.Owner, itemId: x.objectId }} />)
                 : <p className='no-articles'>Sorry, we have no properties matching these criteria!</p>}
         </div>
     )

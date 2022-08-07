@@ -7,7 +7,7 @@ import HomeHeader from './HomeHeader';
 const HomeComponent = () => {
     const navigate = useNavigate()     
    
-    const searchType = ( type) => {
+    const searchType = (event, type) => {
        // console.log(event);
        // console.log(type);
         navigate(`/search/${type}`)
