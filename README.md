@@ -58,8 +58,8 @@ My project has 4 parts.
 - Create comments for properties
 - Personal profile page
 - Update own profile with photo
-- Saving to favorites
-- Remove from favorites
+- Saving properties to favorites
+- Remove properties from favorites
 
 
 # Technologies and stuff
