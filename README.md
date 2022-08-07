@@ -7,35 +7,43 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 In the project directory, you can run:
 ### `npm start`
 
-## Modules
+try project on: https://bgproperties-c3a82.web.app/
 
-My project has 3 main modules.
- 1. AUTH
-    - login
-    - register
-    - users
- 2. CORE
-    - header
-    - footer
- 3. FEATURES
-    - list of cars
-    - promotions
-    - home page
-    - info 
-    - car details
-    - history
-    - admin functions like:
-          - create new car
-          - edit car
-          - delete car 
+## Architecture
+
+My project has 4 parts.
+ 1. Components
+    - 404
+    - Auth
+       - login
+       - register
+    - catalog
+    - card (using for every view with cards)
+    - core
+       - header
+       - footer
+    - Create
+    - Details
+    - Edit
+    - Home
+    - Guards
+    - Search
+    - UserProfile
+ 2. Contexts
+    - UserContext
+        hold info for logged user    
+ 3. Services
+    - Property services
+    - User services
+    - home page    
+ 4. Hooks
 
 ## All users access
 - home page
-- promo packages
-- info
-- reserve car page
-- login
-- register
+- catalog
+- details of items
+- search
+- read comments
 
 ## Not logged in users access
 - All users access
@@ -44,30 +52,26 @@ My project has 3 main modules.
 
 ## Logged in users access
 - All users access
-- Cars details page
-- Can reserve car
-- Create comments for cars
+- Add new offer
+- Edit own offers
+- Delete own offers
+- Create comments for properties
 - Personal profile page
-- Update own profile info
-- History
+- Update own profile with photo
+- Saving to favorites
+- Remove from favorites
 
-## Admin access
-- Logged in users
-- Add new car
-- Edit cars details
-- Delete cars
 
 # Technologies and stuff
 
 ## Frontend
 - HTML
-- Bootstrap
 - CSS
 - Fontawsome
-- Angular 13
-- Angular material
+- React 18.2.0
+
 
 ## Backend
 - Back4app
 
-To start the application install all dependecies for the client and the server with npm install. Start the server with npm start and than the client with ng s. Than navigate to http://localhost:4200 in the browser.
+To start the application install all dependecies for the client and the server with npm install. Start the server with npm start. Than navigate to http://localhost:3000/ in the browser.
