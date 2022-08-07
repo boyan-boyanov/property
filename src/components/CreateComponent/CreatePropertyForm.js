@@ -122,7 +122,7 @@ export default function CreatePropertyForm(props) {
 
                     <div className='form-group'>
                         <label htmlFor="description" className={labelsErrors.description ? 'basicForm__label-error' : ''}>Description:</label>
-                        <input type="text" name="description" id="description" onChange={createHandler} value={details.description} onBlur={inputValidate} />
+                        <input type="text" className='formInput' name="description" id="description" onChange={createHandler} value={details.description} onBlur={inputValidate} />
                     </div>
                     {inputError.description &&
                         <p className='basicForm__form-error'>
@@ -132,7 +132,7 @@ export default function CreatePropertyForm(props) {
 
                     <div className='form-group'>
                         <label htmlFor="price" className={labelsErrors.price ? 'basicForm__label-error' : ''} >Price:</label>
-                        <input type="text" name="price" id="price" onChange={createHandler} value={details.price} onBlur={inputValidate} />
+                        <input type="text" className='formInput' name="price" id="price" onChange={createHandler} value={details.price} onBlur={inputValidate} />
                     </div>
                     {inputError.price &&
                         <p className='basicForm__form-error'>
@@ -141,7 +141,7 @@ export default function CreatePropertyForm(props) {
                     }
                     <div className='form-group'>
                         <label htmlFor="image" className={labelsErrors.image ? 'basicForm__label-error' : ''}  >Images:</label>
-                        <input type="text" name="image" id="image" onChange={createHandler} value={details.image} onBlur={inputValidate} />
+                        <input type="text" className='formInput' name="image" id="image" onChange={createHandler} value={details.image} onBlur={inputValidate} />
                     </div>
                     {inputError.image &&
                         <p className='basicForm__form-error'>

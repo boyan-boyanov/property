@@ -1,4 +1,4 @@
-.user-profile{
+.user-profile {
     position: relative;
 }
 
@@ -165,13 +165,13 @@
     }
 }
 
-.user-profile-photoForm{
+.user-profile-photoForm {
     position: absolute;
     top: 450px;
     left: 50px;
 }
 
-.user-profile-photoForm__input{
+.user-profile-photoForm__input {
     background-color: #fff;
     font-size: 20px;
     height: 40px;
@@ -179,7 +179,7 @@
     width: 400px;
 }
 
-.user-profile-photoForm__btn{
+.user-profile-photoForm__btn {
     padding: 10px 20px;
     color: #fff;
     background-color: #11cdef;
@@ -188,9 +188,54 @@
     cursor: pointer;
 }
 
-.user-profile-photoForm__hide{
+.user-profile-photoForm__hide {
     display: none;
     position: absolute;
     top: 450px;
     left: 50px;
+}
+
+
+@media screen and (width < 660px) {
+    .user-profile-container__back {
+        height: 720px;
+        display: block;
+    }
+
+    .user-profile-card {
+        min-width: 295px;
+        min-height: 280px;
+        top: 400px;
+        right: 35px;
+    }
+
+    .card-profile-card__divimg {
+        position: absolute;
+        border: 1px solid red;
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        top: -55px;
+        left: 75px;
+    }
+
+    .card-profile-card__info {
+        top: 100px;
+    }
+
+    .user-profile-photoForm {
+        top: 254px;
+        left: 7px;
+    }
+
+    .user-profile-photoForm__input{
+        width: 300px;
+    }
+
+    .user-profile-photoForm__btn{
+        margin-top: 5px;
+    }
+    .user-profile-container__h1{
+        font-size: 1.75rem;
+    }
 }

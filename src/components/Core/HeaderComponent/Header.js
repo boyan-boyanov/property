@@ -1,6 +1,6 @@
 import { CgMenuCheese } from 'react-icons/cg';
 import "./header.css"
-import {  useState, useContext } from "react";
+import { useState, useContext } from "react";
 import { doUserLogOut } from '../../../services/userServices';
 import { Link } from 'react-router-dom'
 import { AuthContext } from '../../../contexts/UserContext';
@@ -8,15 +8,16 @@ import { useNavigate } from 'react-router-dom';
 
 
 const Header = () => {
-  const [isNavExpanded, setIsNavExpanded] = useState(false)  
+  const [isNavExpanded, setIsNavExpanded] = useState(false)
   const { auth } = useContext(AuthContext)
-  const {userLogin} = useContext(AuthContext)  
-//console.log(auth.username);
- 
+  const { userLogin } = useContext(AuthContext)
+  //console.log(auth.username);
+
   const navigate = useNavigate()
 
   function logOut(e) {
     e.preventDefault()
+    setIsNavExpanded(!isNavExpanded)
     doUserLogOut()
     userLogin({})
     navigate('/')
@@ -43,21 +44,31 @@ const Header = () => {
         >
           <ul>
             <li>
-              <Link to="/">Home</Link>
+              <Link onClick={() => {
+                setIsNavExpanded(!isNavExpanded)
+              }} to="/">Home</Link>
             </li>
             <li>
-              <Link to="/catalog">Catalog</Link>
+              <Link onClick={() => {
+                setIsNavExpanded(!isNavExpanded)
+              }} to="/catalog">Catalog</Link>
             </li>
             <li>
-              <Link to="/about">About</Link>
+              <Link onClick={() => {
+                setIsNavExpanded(!isNavExpanded)
+              }} to="/about">About</Link>
             </li>
             {auth.username &&
               <>
                 <li>
-                  <Link to="/create">Create</Link>
+                  <Link onClick={() => {
+                    setIsNavExpanded(!isNavExpanded)
+                  }} to="/create">Create</Link>
                 </li>
                 <li>
-                  <Link to={`/profile`}>Profile</Link>
+                  <Link onClick={() => {
+                    setIsNavExpanded(!isNavExpanded)
+                  }} to={`/profile`}>Profile</Link>
                 </li>
                 <li>
                   <Link to="/logout" onClick={logOut}>logout</Link>
@@ -67,10 +78,14 @@ const Header = () => {
             {!auth.username &&
               <>
                 <li>
-                  <Link to="/login">login</Link>
+                  <Link onClick={() => {
+                    setIsNavExpanded(!isNavExpanded)
+                  }} to="/login">login</Link>
                 </li>
                 <li>
-                  <Link to="/register">register</Link>
+                  <Link onClick={() => {
+                    setIsNavExpanded(!isNavExpanded)
+                  }} to="/register">register</Link>
                 </li>
               </>
             }

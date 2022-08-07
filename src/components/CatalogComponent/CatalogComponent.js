@@ -10,8 +10,8 @@ export const CatalogComponent = () => {
     const [showData, setShowData] = useState([]);
     const [page, setPage] = useState({})
     const [loader, setLoader] = useState(true)
-
-    const numberOfViewItems = 5
+    let width = window.screen.width;
+    const numberOfViewItems = width < 670 ? 1 : 5 
 
     useEffect(() => {
         async function waitData() {

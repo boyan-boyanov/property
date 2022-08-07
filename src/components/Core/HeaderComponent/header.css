@@ -19,6 +19,7 @@
 
 .navigation-menu {
     margin-left: auto;
+    z-index: 4;
 }
 
 .navigation-menu ul {
@@ -112,3 +113,4 @@
     display: block;
   }
 }
+

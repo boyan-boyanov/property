@@ -1,6 +1,4 @@
-
-
- .comments, .comments-form {
+.comments, .comments-form {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
@@ -9,17 +7,18 @@
     width: 500px;
 }
 
-.comments-article-div{
+.comments-article-div {
     position: relative;
     display: flex;
     justify-content: flex-end;
     gap: 20px;
 }
 
-.comments article, .comments-form{
+.comments article, .comments-form {
     border: 1px solid gold;
     background-color: rgb(228, 237, 240);
-    color: black;;
+    color: black;
+    ;
     padding: 20px;
 }
 
@@ -39,17 +38,17 @@ form button {
     color: #FFFFFF;
 }
 
-form button:hover{
+form button:hover {
     background-color: #25D366;
     transition: 300ms ease-in-out;
 }
 
-form button:hover:disabled{
+form button:hover:disabled {
     background-color: red;
     transition: 300ms ease-in-out;
 }
 
-form textarea:focus{
+form textarea:focus {
     outline: none;
 }
 
@@ -59,9 +58,9 @@ form textarea:focus{
     border-radius: 5px;
     background-color: #EA5B1B;
     color: #FFFFFF;
-  }
+}
 
-  .addFavorite:hover, .edit:hover{
+.addFavorite:hover, .edit:hover {
     background-color: #25D366;
     transition: 300ms ease-in-out;
 }
@@ -70,7 +69,7 @@ form textarea:focus{
     color: red;
 }
 
-.comments__commetWrapper{
+.comments__commetWrapper {
     margin-bottom: 15px;
     border: 1px solid gold;
 }
@@ -82,13 +81,24 @@ form textarea:focus{
     text-align: center;
 }
 
-.comments__commetWrapper__message{
+.comments__commetWrapper__message {
     padding: 5px 15px;
 }
 
-.loader{
+.loader {
     display: flex;
     justify-content: center;
     margin-top: 50px;
     margin-bottom: 200px;
+}
+
+@media screen and (width < 660px) {
+    .comments, .comments-form {
+        margin: 5vw;
+        width: 90vw;
+    }
+    .CardComponent__article.medium {
+        margin: 5vw;
+width: 90vw !important;
+    }
 }

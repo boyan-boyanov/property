@@ -131,10 +131,24 @@ input, button {
     color: red;
 }
 
-.basicForm .form-inner .form-group:focus-within .label-radio.selected{
+.basicForm .form-inner .form-group:focus-within .label-radio.selected {
     color: greenyellow;
 }
 
-.loginError{
+.loginError {
     color: red;
+}
+
+@media screen and (width < 660px) {
+    .basicForm__container {
+        height: 65vh;
+    }
+
+    .basicForm {
+        width: 90vw;
+    }
+
+    .basicForm .form-inner .form-group input {
+        width: 88%;
+    }
 }

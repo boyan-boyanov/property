@@ -24,3 +24,10 @@
 .paginator__btn {
     font-size: 20px;
 }
+
+
+@media screen and (width < 660px){
+    .CardComponent__article.small{
+        margin-left: 7vw;
+    }
+}
