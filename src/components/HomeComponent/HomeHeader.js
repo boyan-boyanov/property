@@ -13,7 +13,7 @@ e.preventDefault()
 const data = new FormData(e.target)
 const search = data.get('search')
 navigate(`/search/${search}`)
-console.log(search);
+//console.log(search);
 }
 
 

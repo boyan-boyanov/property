@@ -48,7 +48,7 @@ import './loginForm.css'
         let transformName = details.name.toLocaleLowerCase().charAt(0).toUpperCase() + details.name.toLocaleLowerCase().slice(1)
         const sendDetails = {...details, name: transformName}
         const isLogedData = await loggedIn(sendDetails)
-        console.log(isLogedData);
+       // console.log(isLogedData);
         if (isLogedData === "false") {
             setServerError("Username or password not match")
         } else {

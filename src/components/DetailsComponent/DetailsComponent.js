@@ -34,7 +34,7 @@ export const DetailsComponent = () => {
     useEffect(() => {
         async function waitData() {
             const data = await getOne(params.objectId)
-            console.log(data);
+            //console.log(data);
             if (!data.Owner) {
                 navigate('/404')
                 setExistItem(false)
@@ -79,13 +79,13 @@ export const DetailsComponent = () => {
 
         const newData = itemData.comments
         newData.push(comments)
-        console.log(newData);
+        //console.log(newData);
         setItemData(state => ({
             ...state, ...{ comments: newData }
         }))
         editItem(itemData, params.objectId)
-        console.log(itemData);
-        console.log(itemData.Owner);
+       // console.log(itemData);
+        //console.log(itemData.Owner);
         setShowError(false)
         setComments(state => ({ ...state, comments: "" }))
     }

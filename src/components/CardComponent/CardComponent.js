@@ -15,7 +15,7 @@ const CardComponent = (props) => {
     //const params = useParams()
     // console.log(props);
     useEffect(() => {
-        console.log(props);
+       // console.log(props);
         if (props.favorites.includes(auth.objectId)) {
             setIsOnFavorite(true)
         } else {
@@ -64,18 +64,18 @@ const CardComponent = (props) => {
         const currentUserId = auth.objectId
         setIsOnFavorite(state => !state)
         getOne(id).then((value) => {
-            console.log(value);
+           // console.log(value);
             const favoritesArray = value.favorites
 
             if (favoritesArray.includes(currentUserId)) {
-                console.log('yes');
+               // console.log('yes');
                 const index = favoritesArray.indexOf(currentUserId)
                 favoritesArray.splice(index)
-                console.log(favoritesArray);
+               // console.log(favoritesArray);
                 addOrRemoveFavorites(id, { favorites: favoritesArray })
             } else {
                 favoritesArray.push(currentUserId)
-                console.log(favoritesArray);
+               // console.log(favoritesArray);
                 addOrRemoveFavorites(id, { favorites: favoritesArray })
             }
         })

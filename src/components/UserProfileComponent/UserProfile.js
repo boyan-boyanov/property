@@ -18,7 +18,7 @@ const UserProfile = () => {
     useEffect(() => {              
         (async () => {
             const myFavorites = await getFavorites(auth.objectId)
-            console.log(JSON.parse(myFavorites));
+          //  console.log(JSON.parse(myFavorites));
             const data = JSON.parse(myFavorites)
 
             setMyFavorites(state => ([...state, ...data]))
@@ -26,7 +26,7 @@ const UserProfile = () => {
 
         (async () => {
             const myOffers = await getByOwner(auth.objectId)
-            console.log(myOffers);
+          //  console.log(myOffers);
             setOffer(myOffers)
 
         })();
@@ -35,7 +35,7 @@ const UserProfile = () => {
     }, [auth.objectId])
 
     function createProps(x) {
-        console.log(x);
+       
         let pic = ''
         for (let img of x.Images) {
             pic = pic + img + " "

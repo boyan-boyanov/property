@@ -53,7 +53,7 @@ export async function editItem(data, id) {
   try {
     // here you put the objectId that you want to update
     const newHome = await query.get(id);
-    console.log(newHome);
+   // console.log(newHome);
     newHome.set('Type', data.type);
     newHome.set('Description', data.description);
     newHome.set('Price', data.price);
@@ -88,7 +88,7 @@ export async function editItem(data, id) {
 }
 
 export async function deleteItem(id) {
-  console.log(id);
+  //console.log(id);
   await fetch(`${PARSE_HOST_URL}classes/Properties/${id}`, {
     method: 'DELETE',
     headers: {
@@ -100,7 +100,7 @@ export async function deleteItem(id) {
 
 export async function addOrRemoveFavorites(propertyId, bodyData) {
   try {
-    console.log(propertyId, bodyData);
+  //  console.log(propertyId, bodyData);
     const config = {
       method: 'PUT',
       headers: {

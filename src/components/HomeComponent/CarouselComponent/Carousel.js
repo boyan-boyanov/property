@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 const Carousel = () => {
 const navigate = useNavigate()
   const cardsClick = (e) => {
-    console.log(`You clicked ME ! ${e.target.id}`);
+    //console.log(`You clicked ME ! ${e.target.id}`);
     navigate(`/catalog/${e.target.id}`)
   };
   const onMouseOver = () => {
@@ -48,7 +48,7 @@ const navigate = useNavigate()
           }
           setCardsArray(sentData)
         } catch (error) {
-          console.log(`Error: ${JSON.stringify(error)}`);
+          //console.log(`Error: ${JSON.stringify(error)}`);
         }
     })()
      },[])
@@ -64,8 +64,8 @@ const navigate = useNavigate()
   };
 
   const moveNext = () => {
-    console.log(maxScrollWidth.current);
-    console.log(carousel.current.offsetWidth * currentIndex);
+    //console.log(maxScrollWidth.current);
+    //console.log(carousel.current.offsetWidth * currentIndex);
 
     if (
       carousel.current !== null &&

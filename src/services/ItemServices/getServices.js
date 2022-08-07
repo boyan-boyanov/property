@@ -39,7 +39,7 @@ export async function getFavorites(id) {
     const results = await query.find();
     return JSON.stringify(results);
   } catch (error) {
-    console.log(`ParseObjects found: ${JSON.stringify(error)}`);
+   // console.log(`ParseObjects found: ${JSON.stringify(error)}`);
   }
 }
 
@@ -120,7 +120,7 @@ export async function getByQuery(searchType) {
   } else {
     searchBy = "Description"
   }
-  console.log(searchBy);
+ // console.log(searchBy);
   // Finds objects whose title is equal to 'Documentation'
   if (searchBy === 'Type' || searchBy === 'RentOrSale') {
     query.equalTo(searchBy, type);

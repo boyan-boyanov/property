@@ -7,10 +7,10 @@ import { useParams } from 'react-router-dom';
 export const SearchComponent = () => {
     const [allData, setAllData] = useState([])
     let {query} = useParams()
-    console.log(query);
+    //console.log(query);
 
     useEffect(() => {
-        console.log(query);
+      //  console.log(query);
         async function waitData() {
             const data = await getByQuery(query)
              //console.log(data);

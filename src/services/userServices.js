@@ -8,7 +8,7 @@ Parse.serverURL = PARSE_HOST_URL;
 
 
 export async function register(data) {
-    console.log(data);
+   // console.log(data);
 
     const autoLoginData = {
         name: data.name,
@@ -20,7 +20,7 @@ export async function register(data) {
     user.set('password', data.password);
     try {
         let userResult = await user.signUp();
-        console.log('User signed up', userResult);
+      //  console.log('User signed up', userResult);
         return autoLoginData
     } catch (error) {
         return "false";
@@ -28,7 +28,7 @@ export async function register(data) {
 }
 
 export async function loggedIn(data) {
-    console.log(data);
+   // console.log(data);
     try {
         let user = await Parse.User.logIn(data.name, data.password);
         localStorage.setItem("userData", JSON.stringify(user));
@@ -46,7 +46,7 @@ export async function doUserLogOut() {
         // To verify that current user is now empty, currentAsync can be used
         const currentUser = await Parse.User.current();
         if (currentUser === null) {
-            console.log('Success! No user is logged in anymore!');
+          //  console.log('Success! No user is logged in anymore!');
 
         }
         // Update state variable holding current user

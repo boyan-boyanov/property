@@ -52,11 +52,11 @@ export const CatalogComponent = () => {
             setPage(state => ({
                 ...state, currentPage: nextList
             }))
-            console.log("nextList", nextList);
+           // console.log("nextList", nextList);
             const startPoint = (nextList - 1) * numberOfViewItems
-            console.log("startPoint", startPoint);
+           // console.log("startPoint", startPoint);
             const endPoint = startPoint + numberOfViewItems
-            console.log("endPoint", endPoint);
+           // console.log("endPoint", endPoint);
             const nextListOfViews = allData.slice(startPoint, endPoint)
             setShowData(nextListOfViews)
         }
@@ -69,11 +69,11 @@ export const CatalogComponent = () => {
             setPage(state => ({
                 ...state, currentPage: previewList
             }))
-            console.log("previewList", previewList);
+           // console.log("previewList", previewList);
             const startPoint = (previewList - 1) * numberOfViewItems
-            console.log("startPoint", startPoint);
+           // console.log("startPoint", startPoint);
             const endPoint = startPoint + numberOfViewItems
-            console.log("endPoint", endPoint);
+          //  console.log("endPoint", endPoint);
             const previewListOfViews = allData.slice(startPoint, endPoint)
             setShowData(previewListOfViews)
         }

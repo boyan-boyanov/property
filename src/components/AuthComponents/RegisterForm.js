@@ -60,10 +60,10 @@ const RegisterForm = ({ error }) => {
                 
         const sendDetails = {...details, name: transformName, email: details.email.toLocaleLowerCase()}
         const isRegistered = await register(sendDetails)
-        console.log(isRegistered);
+      //  console.log(isRegistered);
 
         const isLogedData = await loggedIn(isRegistered)
-        console.log(isLogedData);
+       // console.log(isLogedData);
         if (isLogedData === "false") {
             setServerError("Name or email alredy exist")
         } else {
