@@ -7,7 +7,7 @@ import { AuthContext } from '../../contexts/UserContext';
 import './loginForm.css'
 
 const RegisterForm = ({ error }) => {
-    const EMAIL_PATTERN = /^([a-zA-Z0-9])+@([a-zA-Z0-9])+\.([a-zA-Z0-9])+$/
+    const EMAIL_PATTERN = /^([a-zA-Z0-9\._])+@([a-zA-Z0-9])+\.([a-zA-Z0-9])+$/
     const [details, setDetails] = useState({ name: '', email: '', password: '', repass: '' })
     const [inputError, setInputError] = useState({})
     const [labelsErrors, setLabelsErrors] = useState({ name: '', email: '', password: '', repass: '' })
