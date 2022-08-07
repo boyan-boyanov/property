@@ -90,7 +90,7 @@ const UserProfile = () => {
                         <p className="card-profile-card__p">Username: {auth.username}</p>
                         <p className="card-profile-card__p">Email: {auth.email}</p>
                         <p className="card-profile-card__p">Added properties: {offer.length}</p>
-                        <p className="card-profile-card__p">Favorite properties:</p>
+                        <p className="card-profile-card__p">Favorite properties: {myFavorites.length}</p>
                     </div>
                 </div>
             </div>
