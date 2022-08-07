@@ -1,71 +1,77 @@
-# Getting Started with Create React App
+# BGProperties
+My very first React project. 
+The project is a basic version of a classifieds site limited to posting real estate ads. The properties are divided into 2 groups (sales, rent) and three categories (apartments, offices, houses).
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
-
 In the project directory, you can run:
-
 ### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+try project on: https://bgproperties-c3a82.web.app/
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Architecture
 
-### `npm test`
+My project has 4 parts.
+ 1. Components
+    - 404
+    - Auth
+       - login
+       - register
+    - catalog
+    - card (using for every view with cards)
+    - core
+       - header
+       - footer
+    - Create
+    - Details
+    - Edit
+    - Home
+    - Guards
+    - Search
+    - UserProfile
+ 2. Contexts
+    - UserContext
+        hold info for logged user    
+ 3. Services
+    - Property services
+    - User services
+    - home page    
+ 4. Hooks
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## All users access
+- home page
+- catalog
+- details of items
+- search
+- read comments
 
-### `npm run build`
+## Not logged in users access
+- All users access
+- login
+- register
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Logged in users access
+- All users access
+- Add new offer
+- Edit own offers
+- Delete own offers
+- Create comments for properties
+- Personal profile page
+- Update own profile with photo
+- Saving properties to favorites
+- Remove properties from favorites
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+# Technologies and stuff
 
-### `npm run eject`
+## Frontend
+- HTML
+- CSS
+- Fontawsome
+- React 18.2.0
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Backend
+- Back4app
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-# react
+To start the application install all dependecies for the client and the server with npm install. Start the server with npm start. Than navigate to http://localhost:3000/ in the browser.
