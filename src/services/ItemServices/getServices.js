@@ -31,6 +31,18 @@ export async function getAll() {
   }
 }
 
+export async function getFavorites(id) {
+
+  const query = new Parse.Query('Properties');
+  query.containsAll('favorites', [id]);
+  try {
+    const results = await query.find();
+    return JSON.stringify(results);
+  } catch (error) {
+    console.log(`ParseObjects found: ${JSON.stringify(error)}`);
+  }
+}
+
 export async function getOne(id) {
 
   const Properties = Parse.Object.extend('Properties');
@@ -94,25 +106,25 @@ export async function getByOwner(id) {
 
 export async function getByQuery(searchType) {
   let type = searchType.toLowerCase()
-  
+
   // 'Post' is just an arbitrary class, replace it with your custom class
   const query = new Parse.Query('Properties');
   let searchBy = ""
   if (type === 'rent' || type === 'sale') {
     searchBy = "RentOrSale"
-  }else if(type === 'house' || type === 'apartment' || type === 'office' ){
+  } else if (type === 'house' || type === 'apartment' || type === 'office') {
     searchBy = "Type"
-  }else if( type === 'houses' || type === 'apartments' || type === 'offices'){
+  } else if (type === 'houses' || type === 'apartments' || type === 'offices') {
     searchBy = "Type"
-    type= type.slice(0, -1);
-  }else {
+    type = type.slice(0, -1);
+  } else {
     searchBy = "Description"
   }
   console.log(searchBy);
   // Finds objects whose title is equal to 'Documentation'
-  if(searchBy === 'Type' || searchBy === 'RentOrSale'){
+  if (searchBy === 'Type' || searchBy === 'RentOrSale') {
     query.equalTo(searchBy, type);
-  }else {
+  } else {
     query.fullText(searchBy, type);
   }
 

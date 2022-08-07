@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react"
 import './userProfile.css'
 import { useContext } from "react";
 import { AuthContext } from "../../contexts/UserContext";
-import { getByOwner } from "../../services/ItemServices/getServices";
+import { getByOwner, getFavorites } from "../../services/ItemServices/getServices";
 import CardComponent from '../CardComponent/CardComponent';
 import { updateUser } from "../../services/userServices";
 
@@ -11,19 +11,31 @@ const UserProfile = () => {
     const [offer, setOffer] = useState([])
     const { auth, updateAuth } = useContext(AuthContext)
     const [showForm, setShowForm] = useState(false)
+    const [myFavorites, setMyFavorites] = useState([])
 
    
 
     useEffect(() => {              
-       
+        (async () => {
+            const myFavorites = await getFavorites(auth.objectId)
+            console.log(JSON.parse(myFavorites));
+            const data = JSON.parse(myFavorites)
+
+            setMyFavorites(state => ([...state, ...data]))
+        })();
+
         (async () => {
             const myOffers = await getByOwner(auth.objectId)
+            console.log(myOffers);
             setOffer(myOffers)
 
-        })()
+        })();
+        
+       
     }, [auth.objectId])
 
     function createProps(x) {
+        console.log(x);
         let pic = ''
         for (let img of x.Images) {
             pic = pic + img + " "
@@ -87,6 +99,12 @@ const UserProfile = () => {
                 <h1>My Offers</h1>
                 {offer.length > 0 ?
                     offer.map(x => <CardComponent key={x.objectId} styles={createProps(x)} favorites={x.favorites} allId={{ owner: x.Owner, itemId: x.objectId }} />)
+                    : <p className='no-articles'>No Articles yet</p>}
+            </div>
+            <div className={'catalog-container'}>
+                <h1>My Favorites</h1>
+                {myFavorites.length > 0 ?
+                    myFavorites.map(x => <CardComponent key={x.objectId} styles={createProps(x)} favorites={x.favorites} allId={{ owner: x.Owner, itemId: x.objectId }} />)
                     : <p className='no-articles'>No Articles yet</p>}
             </div>
             {showForm &&
