@@ -3,6 +3,7 @@ import { getAll } from '../../services/ItemServices/getServices';
 import CardComponent from '../CardComponent/CardComponent';
 import './catalogComponent.css'
 import { Rings } from 'react-loader-spinner'
+import AboutComponent from '../GoogleMapComponent/GoogleMap';
 
 
 export const CatalogComponent = () => {
@@ -11,7 +12,7 @@ export const CatalogComponent = () => {
     const [page, setPage] = useState({})
     const [loader, setLoader] = useState(true)
     let width = window.screen.width;
-    const numberOfViewItems = width < 670 ? 1 : 5 
+    const numberOfViewItems = width < 670 ? 1 : 5
 
     useEffect(() => {
         async function waitData() {
@@ -52,11 +53,11 @@ export const CatalogComponent = () => {
             setPage(state => ({
                 ...state, currentPage: nextList
             }))
-           // console.log("nextList", nextList);
+            // console.log("nextList", nextList);
             const startPoint = (nextList - 1) * numberOfViewItems
-           // console.log("startPoint", startPoint);
+            // console.log("startPoint", startPoint);
             const endPoint = startPoint + numberOfViewItems
-           // console.log("endPoint", endPoint);
+            // console.log("endPoint", endPoint);
             const nextListOfViews = allData.slice(startPoint, endPoint)
             setShowData(nextListOfViews)
         }
@@ -69,11 +70,11 @@ export const CatalogComponent = () => {
             setPage(state => ({
                 ...state, currentPage: previewList
             }))
-           // console.log("previewList", previewList);
+            // console.log("previewList", previewList);
             const startPoint = (previewList - 1) * numberOfViewItems
-           // console.log("startPoint", startPoint);
+            // console.log("startPoint", startPoint);
             const endPoint = startPoint + numberOfViewItems
-          //  console.log("endPoint", endPoint);
+            //  console.log("endPoint", endPoint);
             const previewListOfViews = allData.slice(startPoint, endPoint)
             setShowData(previewListOfViews)
         }
@@ -97,7 +98,9 @@ export const CatalogComponent = () => {
 
                     </span>
                     {allData.length > 0 ?
-                        showData.map(x => <CardComponent key={x.objectId} styles={createProps(x)} favorites={x.favorites} allId={{ owner: x.Owner, itemId: x.objectId }} />)
+                        showData.map(x =>
+                            <CardComponent key={x.objectId} styles={createProps(x)} favorites={x.favorites} allId={{ owner: x.Owner, itemId: x.objectId }} />
+                        )
                         : <p className='no-articles'>No Articles yet</p>}
                 </div>
             )}

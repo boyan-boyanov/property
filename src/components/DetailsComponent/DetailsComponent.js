@@ -6,7 +6,9 @@ import './detailsComponent.css'
 import { editItem } from '../../services/ItemServices/createService';
 import { v4 } from 'uuid'
 import { AuthContext } from '../../contexts/UserContext';
-import {  Rings } from 'react-loader-spinner'
+import { Rings } from 'react-loader-spinner'
+import GoogleMapComponent from '../GoogleMapComponent/GoogleMap';
+
 
 export const DetailsComponent = () => {
     const params = useParams()
@@ -41,6 +43,7 @@ export const DetailsComponent = () => {
             } else {
                 setLoader(false)
             }
+            console.log(data);
             setItemData(data)
         }
         waitData()
@@ -84,7 +87,7 @@ export const DetailsComponent = () => {
             ...state, ...{ comments: newData }
         }))
         editItem(itemData, params.objectId)
-       // console.log(itemData);
+        // console.log(itemData);
         //console.log(itemData.Owner);
         setShowError(false)
         setComments(state => ({ ...state, comments: "" }))
@@ -130,7 +133,7 @@ export const DetailsComponent = () => {
                 <>
 
                     <CardComponent styles={createProps(itemData, isMobile)} favorites={itemData.favorites} allId={{ owner: itemData.Owner, itemId: params.objectId }} />
-
+                    <GoogleMapComponent googleMark={itemData.googleMark} />
                     <section className="comments">
                         <h3>Comments:</h3>
                         <article >
