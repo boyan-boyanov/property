@@ -27,7 +27,8 @@ export default function CreatePropertyForm(props) {
                     description: data.Description,
                     price: data.Price,
                     image: data.Images[0],
-                    rentOrSale: data.RentOrSale
+                    rentOrSale: data.RentOrSale,
+                    googleMark: data.googleMark
                 }
                 setDetails(state => ({ ...state, ...currentItem }))
                 const trueLabelErrors = {

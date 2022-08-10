@@ -66,6 +66,9 @@ export async function editItem(data, id) {
     if (data.comments) {
       newHome.set('comments', data.comments);
     }
+    if (data.googleMark) {
+      newHome.set('googleMark', data.googleMark);
+    }
 
     try {
       const response = await newHome.save();
