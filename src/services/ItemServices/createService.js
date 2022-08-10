@@ -25,6 +25,8 @@ export async function createItem(data) {
   newHome.set('Price', data.price);
   newHome.set('RentOrSale', data.rentOrSale);
   newHome.set('Images', [data.image]);
+  newHome.set('googleMark', data.googleMark);
+
   try {
     const result = await newHome.save();
     const itemId = result.id

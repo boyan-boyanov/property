@@ -43,7 +43,7 @@ export const DetailsComponent = () => {
             } else {
                 setLoader(false)
             }
-            console.log(data);
+           
             setItemData(data)
         }
         waitData()

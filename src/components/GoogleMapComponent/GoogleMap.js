@@ -15,7 +15,7 @@ if (props.googleMark){
   const [lat, lng] = props.googleMark.split(", ")
 const currentLocation = {lat: Number(lat), lng: Number(lng)} 
 const markers = [currentLocation]
-//console.log(props.googleMark);
+
 return <Map markers={markers}/>
 
 }else if(props.aboutMarks){ 
@@ -30,8 +30,8 @@ return <Map markers={markers}/>
 
 
 function Map({markers}) {  
-console.log(markers);
-  return  <GoogleMap mark={markers} zoom={10} center={{lat:43.221850, lng: 27.876106}} mapContainerClassName='map-container'>
+
+  return  <GoogleMap mark={markers} zoom={12} center={{lat:43.221850, lng: 27.876106}} mapContainerClassName='map-container'>
     
    {/* // <Marker position={{lat:43.221850, lng: 27.876106}}/> */}
   {markers ? markers.map((x, index) => <Marker key={index} position={x}/>) : 

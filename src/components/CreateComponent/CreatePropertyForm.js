@@ -8,7 +8,7 @@ import { AuthContext } from '../../contexts/UserContext';
 
 export default function CreatePropertyForm(props) {
     const IMAGE_PATTERN = /^https?:\/\/.+$/
-    const [details, setDetails] = useState({ type: 'house', description: '', price: '', image: '', rentOrSale: '' })
+    const [details, setDetails] = useState({ type: 'house', description: '', price: '', image: '', rentOrSale: '', googleMark: '' })
     const [inputError, setInputError] = useState({})
     const [labelsErrors, setLabelsErrors] = useState({ description: '', price: '', image: '', rentOrSale: '' })
     const { auth, setAuth } = useContext(AuthContext)
@@ -148,6 +148,11 @@ export default function CreatePropertyForm(props) {
                             Image must be valid url.
                         </p>
                     }
+
+                    <div className='form-group'>
+                        <label htmlFor="googleMark" className={labelsErrors.image ? 'basicForm__label-error' : ''}  >Map coordinates:</label>
+                        <input type="text" className='formInput' name="googleMark" id="googleMark" onChange={createHandler} value={details.googleMark} />
+                    </div>
 
                     <div className='form-group'>
                         <label htmlFor="rent" className={`basicForm__label-error label-radio ${details.rentOrSale === 'rent' ? 'selected' : ''}`}>Rent:</label>
