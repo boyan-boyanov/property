@@ -28,7 +28,7 @@ export default function GoogleMapComponent(props) {
 
 
 function Map({ markers, fullScreen }) {
-console.log(fullScreen);
+
   return <GoogleMap mark={markers} zoom={12} center={markers[0]} mapContainerClassName={`map-container ${fullScreen}`}>
 
     {/* // <Marker position={{lat:43.221850, lng: 27.876106}}/> */}

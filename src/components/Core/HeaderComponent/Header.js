@@ -43,46 +43,46 @@ const Header = () => {
           }
         >
           <ul>
-            <li>
+            <li className='navigate__li'>
               <Link onClick={() => {
                 setIsNavExpanded(!isNavExpanded)
               }} to="/">Home</Link>
             </li>
-            <li>
+            <li className='navigate__li'>
               <Link onClick={() => {
                 setIsNavExpanded(!isNavExpanded)
               }} to="/catalog">Catalog</Link>
             </li>
-            <li>
+            <li className='navigate__li'>
               <Link onClick={() => {
                 setIsNavExpanded(!isNavExpanded)
               }} to="/about">About</Link>
             </li>
             {auth.username &&
               <>
-                <li>
+                <li className='navigate__li'>
                   <Link onClick={() => {
                     setIsNavExpanded(!isNavExpanded)
                   }} to="/create">Create</Link>
                 </li>
-                <li>
+                <li className='navigate__li'>
                   <Link onClick={() => {
                     setIsNavExpanded(!isNavExpanded)
                   }} to={`/profile`}>Profile</Link>
                 </li>
-                <li>
+                <li className='navigate__li'>
                   <Link to="/logout" onClick={logOut}>logout</Link>
                 </li>
               </>
             }
             {!auth.username &&
               <>
-                <li>
+                <li className='navigate__li'>
                   <Link onClick={() => {
                     setIsNavExpanded(!isNavExpanded)
                   }} to="/login">login</Link>
                 </li>
-                <li>
+                <li className='navigate__li'>
                   <Link onClick={() => {
                     setIsNavExpanded(!isNavExpanded)
                   }} to="/register">register</Link>
