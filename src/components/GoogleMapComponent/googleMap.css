@@ -5,6 +5,14 @@
     margin-top: -50px;
 }
 
+.map-container.fullScreenMap{
+    width: 97vw;    
+    margin: 0;
+    margin-left: 1vw;
+    margin-bottom: 10px;
+    margin-top: -90px;
+}
+
 @media screen and (width < 1230px){
     .map-container {
         width: 700px;

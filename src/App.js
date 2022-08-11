@@ -16,7 +16,8 @@ import { lazy, Suspense, useEffect, useState } from 'react';
 import { SearchComponent } from './components/SearchComponent/SearchComponent';
 import PrivateRoute from './components/Guards/PrivateRoute';
 import LoginRoute from './components/Guards/LoginRouts';
-import AboutComponent from './components/GoogleMapComponent/GoogleMap';
+import AboutComponent from './components/About/AboutComponent';
+
 const CreatePropertyForm = lazy(() => import('./components/CreateComponent/CreatePropertyForm'))
 
 // import CreatePropertyForm from './components/Properties/CreatePropertyForm';
@@ -64,7 +65,7 @@ function App() {
               </Suspense>
             } />
           </Route>
-          
+          <Route path='/about' element={<AboutComponent />} />
 
           <Route path='*' element={<NotFound />} />
         </Routes>
