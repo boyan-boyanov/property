@@ -31,7 +31,7 @@ return <Map markers={markers}/>
 
 function Map({markers}) {  
 
-  return  <GoogleMap mark={markers} zoom={12} center={{lat:43.221850, lng: 27.876106}} mapContainerClassName='map-container'>
+  return  <GoogleMap mark={markers} zoom={12} center={markers[0]} mapContainerClassName='map-container'>
     
    {/* // <Marker position={{lat:43.221850, lng: 27.876106}}/> */}
   {markers ? markers.map((x, index) => <Marker key={index} position={x}/>) : 

@@ -1,5 +1,30 @@
 .map-container {
-    width: 80vw;
+    width: 1000px;
     height: 500px;
     margin-left: 10vw;
+    margin-top: -50px;
+}
+
+@media screen and (width < 1230px){
+    .map-container {
+        width: 700px;
+        height: 500px;
+        margin-left: 10vw;
+    }
+}
+
+@media screen and (width < 850px){
+    .map-container {
+        width: 500px;
+        height: 300px;
+        margin: 0 20vw 3vw 20vw;
+    }
+}
+
+@media screen and (width < 660px){
+    .map-container {
+        width: 90vw;
+        height: 300px;
+        margin: 0 5vw 3vw 5vw;
+    }
 }
